@@ -36,7 +36,7 @@ addLayer("p", {
     description: "Boost points based on points.",
     cost: new Decimal(2),
     }
-}}
+}})
 addLayer("i", {
     name: "insanity", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "I", // This appears on the layer's node. Default is the id with the first letter capitalized
