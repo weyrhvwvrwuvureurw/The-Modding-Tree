@@ -37,6 +37,7 @@ addLayer("p", {
     cost: new Decimal(2),
     }
 }})
+
 addLayer("i", {
     name: "insanity", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "I", // This appears on the layer's node. Default is the id with the first letter capitalized
@@ -48,7 +49,7 @@ addLayer("i", {
     color: "#FFA600",
     requires: new Decimal(1650), // Can be a function that takes requirement increases into account
     resource: "insanity", // Name of prestige currency
-    baseResource: "prestige points", // Name of resource prestige is based on
+    baseResource: "prestige", // Name of resource prestige is based on
     baseAmount() {return prestige.points}, // Get the current amount of baseResource
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.6, // Prestige currency exponent
