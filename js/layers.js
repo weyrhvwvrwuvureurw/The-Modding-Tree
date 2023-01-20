@@ -28,9 +28,10 @@ addLayer("p", {
     11: {
     title: "Double your points gain.",
     description: "Double your points gain.",
-    cost: new Decimal(25),
+    cost: new Decimal(1),
     },
 })
+
 addLayer("i", {
     name: "insanity", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "I", // This appears on the layer's node. Default is the id with the first letter capitalized
