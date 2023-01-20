@@ -39,14 +39,15 @@ addLayer("p", {
         return player[this.layer].points.add(1).pow(0.5)
     },
     effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
-    }
+    },
     13: {
         title: "More Synergy.",
         description: "Boost prestige points based on points.",
         cost: new Decimal(5),
         effect() {
-            return player.points.add(1).pow(0.35)
-            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+            return player.points.add(1).pow(0.15)
+        },
+         effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },    
     }
 }})
         
