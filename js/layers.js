@@ -26,10 +26,15 @@ addLayer("p", {
     ],
     layerShown(){return true},
     11: {
-    title: "Double your points gain.",
-    description: "Double your points gain.",
-    cost: new Decimal(1),
-    },
+        title: "Double your points gain.",
+        description: "Double your points gain.",
+        cost: new Decimal(1),
+       },
+    12: {
+        title: "Double your points gain.",
+        description: "Double your points gain.",
+        cost: new Decimal(1),
+       },
 })
 
 addLayer("i", {
