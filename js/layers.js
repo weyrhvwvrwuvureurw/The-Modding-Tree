@@ -30,7 +30,7 @@ addLayer("p", {
     title: "Double your points gain.",
     description: "Double your points gain.",
     cost: new Decimal(1),
-    }
+    },
         12: {
     title: "Synergy.",
     description: "Boost points based on points.",
