@@ -49,7 +49,7 @@ function getPointGen() {
         let mult = new Decimal(1)
         if (hasUpgrade('p', 13)) mult = mult.times(upgradeEffect('p', 13))
         return mult
-    }
+    },
 	return gain
 }
 
