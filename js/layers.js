@@ -44,13 +44,13 @@ addLayer("i", {
     position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
     startData() { return {
         unlocked: false,
-		points: new Decimal(1500),
+		points: new Decimal(150000),
     }},
     color: "#FFA600",
-    requires: new Decimal(1650), // Can be a function that takes requirement increases into account
+    requires: new Decimal(165000), // Can be a function that takes requirement increases into account
     resource: "insanity", // Name of prestige currency
-    baseResource: "prestige", // Name of resource prestige is based on
-    baseAmount() {return prestige.points}, // Get the current amount of baseResource
+    baseResource: "points", // Name of resource prestige is based on
+    baseAmount() {return player.points}, // Get the current amount of baseResource
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.6, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
