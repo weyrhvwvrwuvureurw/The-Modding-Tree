@@ -53,7 +53,15 @@ addLayer("p", {
             title: "Raise points to the 1.25th power.",
             description: "Self explanatory.",
             cost: new Decimal(10),
-        }
+        },
+        21: {
+            title: "Self-Synergy.",
+            description: "Points boost themselves.",
+            cost: new Decimal(30),
+        },
+        effect() {
+            return player.points.add(1).log(2).add(1).pow(2)
+        },
 }})
         
 
@@ -66,12 +74,12 @@ addLayer("i", {
 		points: new Decimal(0),
     }},
     color: "#FFA600",
-    requires: new Decimal(10000), // Can be a function that takes requirement increases into account
+    requires: new Decimal(1e8), // Can be a function that takes requirement increases into account
     resource: "insanity", // Name of prestige currency
     baseResource: "points", // Name of resource prestige is based on
     baseAmount() {return player.points}, // Get the current amount of baseResource
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    exponent: 1.5, // Prestige currency exponent
+    exponent: 0.3, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(6)
         return mult
