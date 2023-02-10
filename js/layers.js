@@ -55,16 +55,12 @@ addLayer("p", {
             cost: new Decimal(10),
         },
         21: {
-            title: "Self-Synergy.",
-            description: "Points boost themselves.",
-            cost: new Decimal(30),
+            title: "GAS GAS.",
+            description: "Points are SQUARED.",
+            cost: new Decimal(50),
         },
-        effect() {
-            return player.points.add(1).log(2).add(1).pow(2)
-        },
-}})
+    })
         
-
 addLayer("i", {
     name: "insanity", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "I", // This appears on the layer's node. Default is the id with the first letter capitalized
