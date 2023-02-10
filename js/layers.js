@@ -49,6 +49,11 @@ addLayer("p", {
         },
         effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
         },
+        14: {
+            title: "Raise points to the 1.25th power.",
+            description: "Self explanatory.",
+            cost: new Decimal(10),
+        }
 }})
         
 
@@ -61,7 +66,7 @@ addLayer("i", {
 		points: new Decimal(0),
     }},
     color: "#FFA600",
-    requires: new Decimal(1000), // Can be a function that takes requirement increases into account
+    requires: new Decimal(10000), // Can be a function that takes requirement increases into account
     resource: "insanity", // Name of prestige currency
     baseResource: "points", // Name of resource prestige is based on
     baseAmount() {return player.points}, // Get the current amount of baseResource
