@@ -40,7 +40,15 @@ addLayer("p", {
     },
     effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
     },
-    
+    13: {
+        title: "Better Synergy.",
+        description: "Boost points based on prestige points again.",
+        cost: new Decimal(5),
+        effect() {
+            return player[this.layer].points.add(1).pow(0.75)
+        },
+        effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+        },
 }})
         
 
@@ -50,10 +58,10 @@ addLayer("i", {
     position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
     startData() { return {
         unlocked: false,
-		points: new Decimal(150000),
+		points: new Decimal(0),
     }},
     color: "#FFA600",
-    requires: new Decimal(165000), // Can be a function that takes requirement increases into account
+    requires: new Decimal(1000), // Can be a function that takes requirement increases into account
     resource: "insanity", // Name of prestige currency
     baseResource: "points", // Name of resource prestige is based on
     baseAmount() {return player.points}, // Get the current amount of baseResource
