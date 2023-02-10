@@ -54,13 +54,8 @@ addLayer("p", {
             description: "Self explanatory.",
             cost: new Decimal(10),
         },
-        21: {
-            title: "GAS GAS.",
-            description: "Points are SQUARED.",
-            cost: new Decimal(50),
-        },
-    })
-        
+    })   
+
 addLayer("i", {
     name: "insanity", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "I", // This appears on the layer's node. Default is the id with the first letter capitalized
