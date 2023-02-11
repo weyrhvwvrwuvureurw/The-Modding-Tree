@@ -13,11 +13,13 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.0.1.3",
-	name: "The Insanity Breakout.",
+	num: "0.0.1.4",
+	name: "The Insanity Pandemic.",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
+<h3>v0.0.1.4</h3><br>
+		- Added 3 upgrades.<br>
 <h3>v0.0.1.3</h3><br>
 		- Added 2 upgrades.<br>
 		- Fixed some bugs.<br>
@@ -67,6 +69,9 @@ function getPointGen() {
 	if (hasUpgrade('i', 11)) gain = gain.times(upgradeEffect('i', 11));
 	if (hasUpgrade('i', 12)) gain = gain.pow(upgradeEffect('i', 12));
 	if (hasUpgrade('i', 13)) gain = gain.times(upgradeEffect('i', 13));
+	if (hasUpgrade('i', 14)) gain = gain.times(upgradeEffect('i', 14));
+	if (hasUpgrade('i', 15)) gain = gain.times(upgradeEffect('i', 15));
+	if (hasUpgrade('i', 16)) gain = gain.times(upgradeEffect('i', 16));
 	return gain
 }
 	
@@ -81,7 +86,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.points.gte(new Decimal("1e125"))
+	return player.points.gte(new Decimal("1e200"))
 }
 
 

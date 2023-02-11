@@ -59,16 +59,8 @@ addLayer("p", {
             description: "Raise points to the 1.05th power.",
             cost: new Decimal(305),
         },
-        challenges: {
-            11: {
-                name: "THATS A LOT OF DAMAGE",
-                challengeDescription: "OUCH",
-                canComplete: function() {return player.points.gte(350)},
-                goalDescription: player.points.pow(0.5)
-            },
-            
-        },
-    }}) 
+        
+    }})     
         
    
 addLayer("i", {
@@ -101,7 +93,7 @@ addLayer("i", {
     upgrades: {
         11: {
             title: "WOW",
-        description: "Boost prestige points based on insanity.",
+        description: "Boost points based on insanity for the 1st time.",
         cost: new Decimal(5),
         effect() {
             return player[this.layer].points.add(1).pow(0.1)
@@ -122,7 +114,34 @@ addLayer("i", {
 description: "Boost insanity based on points.",
 cost: new Decimal(12),
 effect() {
-    return player.points.add(1).pow(0.000275)
+    return player.points.add(1).pow(0.00275)
+},
+effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+},
+14: {
+    title: "more nice :D",
+description: "MULTIPLY points by how much insanity you have.",
+cost: new Decimal(15),
+effect() {
+    return player[this.layer].add(1).pow(15.2575)
+},
+effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+},
+15: {
+    title: "coolest upgrade ever.",
+description: "Boost points based on themselves",
+cost: new Decimal(18),
+effect() {
+    return player.points.max(Decimal.dOne).log2().add(Decimal.dOne).pow(Decimal.dTwo)
+},
+effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+},
+16: {
+    title: "i am so happy!!!",
+description: "Boost insanity again!",
+cost: new Decimal(25),
+effect() {
+    return player.points.add(1).pow(0.002775)
 },
 effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
 },
