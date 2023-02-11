@@ -55,8 +55,8 @@ addLayer("p", {
             cost: new Decimal(10),
         },
         21: {
-            title: "DA GAS.",
-            description: "Raise points to the 1.3th power.",
+            title: "DA GAS (kinda).",
+            description: "Raise points to the 1.05th power.",
             cost: new Decimal(305),
         },
     }}) 
@@ -100,7 +100,7 @@ addLayer("i", {
         effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
       },
       12: {
-        title: "WOW",
+        title: "MORE WOW",
     description: "Boost points based on insanity.",
     cost: new Decimal(8),
     effect() {
@@ -108,4 +108,13 @@ addLayer("i", {
     },
     effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
   },
+  13: {
+    title: "hm...",
+description: "Boost insanity based on points.",
+cost: new Decimal(12),
+effect() {
+    return player.points.add(1).pow(0.000275)
+},
+effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+},
     }})
