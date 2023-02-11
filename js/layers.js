@@ -90,12 +90,12 @@ addLayer("i", {
     layerShown(){return true},
     upgrades: {
         11: {
-            title: "Self-Synergy.",
-            description: "Boost points based on themselves",
-            cost: new Decimal(3),
-            effect() {
-                player.points.max(Decimal.dOne).log2().add(Decimal.dOne).pow(Decimal.dTwo)
-            },
-            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
-            },
+            title: "WOW",
+        description: "Boost prestige points based on insanity.",
+        cost: new Decimal(5),
+        effect() {
+            return player[this.layer].points.add(1).pow(0.1)
+        },
+        effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+      }
     }})
