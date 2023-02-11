@@ -18,7 +18,9 @@ let VERSION = {
 }
 
 let changelog = `<h1>Changelog:</h1><br>
-<h3>v0.0.1.1</h3><br>
+<h3>v0.0.1.2.1</h3><br>
+		- Added a few more upgrades.<br>
+<h3>v0.0.1.2</h3><br>
 		- Added 1 more upgrade.<br>
 	<h3>v0.0.1.1.1</h3><br>
 		- Added 1 more upgrade.<br>
@@ -56,7 +58,8 @@ function getPointGen() {
 	if (hasUpgrade('p', 12)) gain = gain.times(upgradeEffect('p', 12));
 	if (hasUpgrade('p', 13)) gain = gain.times(upgradeEffect('p', 13));
 	if (hasUpgrade('p', 14)) gain = gain.pow(1.25);
-	if (hasUpgrade('p', 21)) gain = gain.pow(2);
+	if (hasUpgrade('p', 21)) gain = gain.pow(1.3);
+	if (hasUpgrade('i', 11)) gain = gain.times(upgradeEffect('p', 11));
 	return gain
 }
 	
@@ -71,7 +74,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.points.gte(new Decimal("1e50"))
+	return player.points.gte(new Decimal("e280000000"))
 }
 
 

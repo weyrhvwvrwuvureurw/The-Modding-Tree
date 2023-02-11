@@ -56,8 +56,8 @@ addLayer("p", {
         },
         21: {
             title: "DA GAS.",
-            description: "Square points.",
-            cost: new Decimal(35),
+            description: "Raise points to the 1.3th power.",
+            cost: new Decimal(305),
         },
     }})  
 
@@ -70,7 +70,7 @@ addLayer("i", {
 		points: new Decimal(0),
     }},
     color: "#FFA600",
-    requires: new Decimal(1e20), // Can be a function that takes requirement increases into account
+    requires: new Decimal("e15000000"), // Can be a function that takes requirement increases into account
     resource: "insanity", // Name of prestige currency
     baseResource: "points", // Name of resource prestige is based on
     baseAmount() {return player.points}, // Get the current amount of baseResource
@@ -87,5 +87,15 @@ addLayer("i", {
     hotkeys: [
         {key: "i", description: "I: Reset for insanity.", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return true}
-})
+    layerShown(){return true},
+    upgrades: {
+        11: {
+            title: "Self-Synergy.",
+            description: "Boost points based on themselves",
+            cost: new Decimal(3),
+            effect() {
+                player.points.max(Decimal.dOne).log2().add(Decimal.dOne).pow(Decimal.dTwo)
+            },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+            },
+    }})
