@@ -145,4 +145,40 @@ effect() {
 },
 effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
 },
+21: {
+    title: "funni",
+description: "Boost insanity based on themselves.",
+cost: new Decimal(35),
+effect() {
+    return player[this.layer].points.max(Decimal.dOne).log2().add(Decimal.dOne).pow(1.1)
+},
+effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+},
+22: {
+    title: "funi",
+description: "Boost insanity once again",
+cost: new Decimal(50),
+effect() {
+    return player.points.add(1).pow(0.0028)
+},
+effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+},
+23: {
+    title: "Very very nice!",
+description: "Boost points ONCE AGAIN.",
+cost: new Decimal(75),
+effect() {
+    return player[this.layer].points.add(1).pow(0.02)
+},
+effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+},
+24: {
+    title: "31",
+description: "The three ones!",
+cost: new Decimal(111),
+effect() {
+    return player[this.layer].points.add(1).pow(0.03)
+},
+effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+},
     }})
