@@ -59,8 +59,9 @@ addLayer("p", {
             description: "Raise points to the 1.3th power.",
             cost: new Decimal(305),
         },
-    }})  
-
+    }}) 
+        
+   
 addLayer("i", {
     name: "insanity", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "I", // This appears on the layer's node. Default is the id with the first letter capitalized
@@ -97,5 +98,14 @@ addLayer("i", {
             return player[this.layer].points.add(1).pow(0.1)
         },
         effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
-      }
+      },
+      12: {
+        title: "WOW",
+    description: "Boost points based on insanity.",
+    cost: new Decimal(8),
+    effect() {
+        return player[this.layer].points.add(1).pow(0.025)
+    },
+    effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+  },
     }})
