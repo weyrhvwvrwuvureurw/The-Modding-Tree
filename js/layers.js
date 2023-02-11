@@ -72,8 +72,8 @@ addLayer("i", {
     color: "#FFA600",
     requires: new Decimal(1e20), // Can be a function that takes requirement increases into account
     resource: "insanity", // Name of prestige currency
-    baseResource: "prestige points", // Name of resource prestige is based on
-    baseAmount() {return player.prestige.points}, // Get the current amount of baseResource
+    baseResource: "points", // Name of resource prestige is based on
+    baseAmount() {return player.points}, // Get the current amount of baseResource
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.4, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
