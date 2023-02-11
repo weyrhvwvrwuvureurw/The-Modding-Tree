@@ -132,7 +132,7 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
 description: "Boost points based on themselves",
 cost: new Decimal(18),
 effect() {
-    return player.points.max(Decimal.dOne).log2().add(Decimal.dOne).pow(Decimal.dTwo)
+    return player.points.max(Decimal.dOne).log2().add(Decimal.dOne).pow(0.0565)
 },
 effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
 },
@@ -150,7 +150,7 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
 description: "Boost insanity based on themselves.",
 cost: new Decimal(35),
 effect() {
-    return player[this.layer].points.max(Decimal.dOne).log2().add(Decimal.dOne).pow(1.1)
+    return player[this.layer].points.max(Decimal.dOne).log2().add(Decimal.dOne).pow(0.924575)
 },
 effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
 },
@@ -177,7 +177,7 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
 description: "The three ones!",
 cost: new Decimal(111),
 effect() {
-    return player[this.layer].points.add(1).pow(0.03)
+    return player[this.layer].points.add(1).pow(0.0111)
 },
 effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
 },
@@ -190,7 +190,7 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
             unlocked: false,
             points: new Decimal(0),
         }},
-        color: "#FFA600",
+        color: "#FF9800",
         requires: new Decimal("1e65"), // Can be a function that takes requirement increases into account
         resource: "infinity points", // Name of prestige currency
         baseResource: "points", // Name of resource prestige is based on
@@ -220,5 +220,50 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
             },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
         },
+        12: {
+            title: "Generator be like.",
+            description: "Boost points based on IP lol.",
+        cost: new Decimal(2),
+        effect() {
+            return player[this.layer].points.add(1).pow(0.00059)
+        },
+        effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
+    },
+    13: {
+        title: "PT:C be like",
+        description: "Boost points based on IP but better.",
+    cost: new Decimal(3),
+    effect() {
+        return player[this.layer].points.add(1).pow(0.001)
+    },
+    effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
+},
+14: {
+    title: "PT:R be like",
+    description: "Boost points based on IP but balanced.",
+cost: new Decimal(5),
+effect() {
+    return player[this.layer].points.add(1).pow(0.000666)
+},
+effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
+},
+15: {
+    title: "AD be like",
+    description: "Boost points based on IP but balanced.",
+cost: new Decimal(8),
+effect() {
+    return player[this.layer].points.max(Decimal.dOne).log2().add(Decimal.dOne).pow(0.425)
+},
+effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+},
+21: {
+    title: "TI alpha like",
+    description: "Boost points based on IP but UNbalanced.",
+cost: new Decimal(13),
+effect() {
+    return player[this.layer].points.max(Decimal.dOne).log2().add(Decimal.dOne).pow(0.452)
+},
+effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+},
     },
 })

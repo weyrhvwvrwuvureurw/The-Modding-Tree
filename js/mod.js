@@ -13,11 +13,13 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.0.1.5.1",
-	name: "Infinity to Stop it.",
+	num: "0.0.1.6",
+	name: "Infinity Vaccine.",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
+<h3>v0.0.1.6</h3><br>
+		- Added tons of upgrades and fixed some bugs.<br>
 <h3>v0.0.1.5.1</h3><br>
 		- Added Infinity and an upgrade.<br>
 <h3>v0.0.1.5</h3><br>
@@ -81,6 +83,11 @@ function getPointGen() {
 	if (hasUpgrade('i', 23)) gain = gain.times(upgradeEffect('i', 23));
 	if (hasUpgrade('i', 24)) gain = gain.times(upgradeEffect('i', 24));
 	if (hasUpgrade('inf', 11)) gain = gain.times(upgradeEffect('inf', 11));
+	if (hasUpgrade('inf', 12)) gain = gain.pow(upgradeEffect('inf', 12));
+	if (hasUpgrade('inf', 13)) gain = gain.pow(upgradeEffect('inf', 13));
+	if (hasUpgrade('inf', 14)) gain = gain.pow(upgradeEffect('inf', 14));
+	if (hasUpgrade('inf', 15)) gain = gain.times(upgradeEffect('inf', 15));
+	if (hasUpgrade('inf', 21)) gain = gain.times(upgradeEffect('inf', 21));
 	return gain
 }
 	
