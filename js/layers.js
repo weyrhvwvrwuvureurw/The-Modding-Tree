@@ -59,6 +59,15 @@ addLayer("p", {
             description: "Raise points to the 1.05th power.",
             cost: new Decimal(305),
         },
+        challenges: {
+            11: {
+                name: "THATS A LOT OF DAMAGE",
+                challengeDescription: "OUCH",
+                canComplete: function() {return player.points.gte(350)},
+                goalDescription: player.points.pow(0.5)
+            },
+            
+        },
     }}) 
         
    
