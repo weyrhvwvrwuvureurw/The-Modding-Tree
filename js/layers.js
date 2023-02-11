@@ -54,7 +54,12 @@ addLayer("p", {
             description: "Self explanatory.",
             cost: new Decimal(10),
         },
-    })   
+        21: {
+            title: "DA GAS.",
+            description: "Square points.",
+            cost: new Decimal(35),
+        },
+    }})  
 
 addLayer("i", {
     name: "insanity", // This is optional, only used in a few places, If absent it just uses the layer id.
