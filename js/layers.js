@@ -77,7 +77,7 @@ addLayer("i", {
     baseResource: "points", // Name of resource prestige is based on
     baseAmount() {return player.points}, // Get the current amount of baseResource
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    exponent: 0.125, // Prestige currency exponent
+    exponent: 0.04, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(6)
         return mult
@@ -150,7 +150,7 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
 description: "Boost points based on insanity.",
 cost: new Decimal(35),
 effect() {
-    return player[this.layer].points.max(Decimal.dOne).log2().add(Decimal.dOne).pow(0.0009)
+    return player[this.layer].points.max(Decimal.dOne).log2().add(Decimal.dOne).pow(0.000002)
 },
 effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
 },
