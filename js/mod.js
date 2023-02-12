@@ -13,11 +13,13 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.0.2",
-	name: "MILESTONES!!!",
+	num: "0.0.3",
+	name: "Eternity.",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
+<h3>v0.0.3</h3><br>
+		- Added Eternity, 3 challenges and an upgrade.<br>
 <h3>v0.0.2</h3><br>
 		- Added 3 challenges and 4 milestones.<br>
 <h3>v0.0.1.7.1</h3><br>
@@ -106,7 +108,14 @@ function getPointGen() {
 	if (inChallenge('inf', 12)) gain = gain.div(1e25)
 	if (hasChallenge('inf', 12)) gain = gain.times(1e100)
 	if (inChallenge('inf', 13)) gain = log2(gain)
-	if (hasChallenge('inf', 13)) gain = gain.pow(1.09)
+	if (hasChallenge('inf', 13)) gain = gain.pow(1.095)
+	if (inChallenge('inf', 14)) gain = gain.pow(0.4)
+	if (hasChallenge('inf', 14)) gain = gain.pow(1.0975)
+	if (inChallenge('inf', 15)) gain = gain.div(1e35)
+	if (hasChallenge('inf', 15)) gain = gain.times(1e125)
+	if (inChallenge('inf', 16)) gain = log2(gain.pow(0.8))
+	if (hasChallenge('inf', 16)) gain = gain.pow(1.09)
+	if (hasUpgrade('e', 11)) gain = gain.pow(upgradeEffect('e', 11));
 	return gain
 }
 	
@@ -121,7 +130,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.points.gte(new Decimal("1e1444"))
+	return player.e.points.gte(new Decimal("1"))
 }
 
 

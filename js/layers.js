@@ -185,7 +185,7 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
     addLayer("inf", {
         name: "infinity", // This is optional, only used in a few places, If absent it just uses the layer id.
         symbol: "∞", // This appears on the layer's node. Default is the id with the first letter capitalized
-        position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+        position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
         startData() { return {
             unlocked: false,
             points: new Decimal(0),
@@ -295,25 +295,47 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
     },
     challenges: {
         11: {
-            name: "Ouch",
+            name: "Infinity Challenge 1",
             challengeDescription: "^0.5 points.",
             canComplete: function() {return player.points.gte(1e40)},
             goalDescription: "Reach 1e40 pts.",
             rewardDescription: "^1.11 points."
         },
         12: {
-            name: "Ouch",
+            name: "Infinity Challenge 2",
             challengeDescription: "/1e25 points.",
             canComplete: function() {return player.points.gte(1e50)},
             goalDescription: "Reach 1e50 pts.",
             rewardDescription: "x1e100 points."
         },
         21: {
-            name: "Ouch",
+            name: "Infinity Challenge 3",
             challengeDescription: "log2 points.",
             canComplete: function() {return player.points.gte(1e45)},
             goalDescription: "Reach 1e45 pts.",
             rewardDescription: "^1.095 points."
+        },
+        22: {
+            name: "Infinity Challenge 4",
+            challengeDescription: "^0.4 points.",
+            canComplete: function() {return player.points.gte(1e55)},
+            goalDescription: "Reach 1e55 pts.",
+            rewardDescription: "^1.0975 points."
+        },
+        31: {
+            name: "Infinity Challenge 5",
+            challengeDescription: "/1e35 points.",
+            canComplete: function() {return player.points.gte(3.16e50)},
+            goalDescription: "Reach 3.16e50 pts.",
+            rewardDescription: "x1e125 points."
+        },
+        32: {
+            name: "Infinity Challenge 6",
+            challengeDescription: "log2 points and ^0.8 points.",
+            canComplete: function() {return player.points.gte(1e40)},
+            goalDescription: "Reach 1e40 pts.",
+            rewardDescription: "^1.09 points.",
+            completionLimit: new Decimal("5"),
         },
     },       
         milestones: {
@@ -341,5 +363,44 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
                 done() { return player[this.layer].points.gte(1e6) },
                 unlocked() { true }
             },
+        },
+    })
+    addLayer("e", {
+        name: "eternity", // This is optional, only used in a few places, If absent it just uses the layer id.
+        symbol: "Ω", // This appears on the layer's node. Default is the id with the first letter capitalized
+        position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+        startData() { return {
+            unlocked: false,
+            points: new Decimal(0),
+        }},
+        color: "#B341E0",
+        requires: new Decimal("1.79769e308"), // Can be a function that takes requirement increases into account
+        resource: "eternity points", // Name of prestige currency
+        baseResource: "infinity points", // Name of resource prestige is based on
+        baseAmount() {return player.inf.points}, // Get the current amount of baseResource
+        type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
+        exponent: 0.0215, // Prestige currency exponent
+        gainMult() { // Calculate the multiplier for main currency from bonuses
+            mult = new Decimal(6)
+            return mult
+        },
+        gainExp() { // Calculate the exponent on main currency from bonuses
+            return new Decimal(1.012)
+        },
+        row: 2, // Row the layer is in on the tree (0 is the first row)
+        hotkeys: [
+            {key: "i", description: "I: Reset for insanity.", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+        ],
+        layerShown(){return true},
+        upgrades: {
+            11: {
+                title: "Eternity be like",
+            description: "Boost points based on EP.",
+            cost: new Decimal(1),
+            effect() {
+                return player[this.layer].points.add(1).pow(0.15)
+            },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
+        },
         },
     })
