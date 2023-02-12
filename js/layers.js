@@ -111,7 +111,7 @@ addLayer("i", {
   },
   13: {
     title: "hm...",
-description: "Boost insanity based on points.",
+description: "Boost points!",
 cost: new Decimal(12),
 effect() {
     return player.points.add(1).pow(0.00275)
@@ -138,10 +138,10 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
 },
 16: {
     title: "i am so happy!!!",
-description: "Boost insanity again!",
+description: "Boost points again!",
 cost: new Decimal(25),
 effect() {
-    return player.points.add(1).pow(0.002775)
+    return player.points.add(1).pow(0.00093)
 },
 effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
 },
