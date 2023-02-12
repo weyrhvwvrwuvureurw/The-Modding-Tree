@@ -123,7 +123,7 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
 description: "MULTIPLY points by how much insanity you have.",
 cost: new Decimal(15),
 effect() {
-    return player[this.layer].points.add(1).pow(9.195)
+    return player[this.layer].points.add(1).pow(1.205)
 },
 effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
 },
