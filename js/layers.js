@@ -296,9 +296,9 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
     challenges: {
         11: {
             name: "Ouch",
-            challengeDescription: "description of ouchie",
+            challengeDescription: "^0.5 points",
             canComplete: function() {return player.points.gte(1e40)},
-            goalDescription: "^0.5 points.",
+            goalDescription: "Reach 1e40 pts.",
             rewardDescription: "^1.11 points."
         },
 }})
