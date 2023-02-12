@@ -13,11 +13,13 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.0.1.7.1",
-	name: "CHALLENGES!!!",
+	num: "0.0.2",
+	name: "MILESTONES!!!",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
+<h3>v0.0.2</h3><br>
+		- Added 3 challenges and 4 milestones.<br>
 <h3>v0.0.1.7.1</h3><br>
 		- Fixed an inflation bug.<br>
 <h3>v0.0.1.7</h3><br>
@@ -97,6 +99,14 @@ function getPointGen() {
 	if (hasUpgrade('inf', 24)) gain = gain.pow(upgradeEffect('inf', 24));
 	if (inChallenge('inf', 11)) gain = gain.pow(0.5)
 	if (hasChallenge('inf', 11)) gain = gain.pow(1.11)
+	if (hasMilestone('inf', 0)) gain = gain.times(1e9)
+	if (hasMilestone('inf', 1)) gain = gain.times(1e15)
+	if (hasMilestone('inf', 2)) gain = gain.times(1e35)
+	if (hasMilestone('inf', 3)) gain = gain.pow(1.1)
+	if (inChallenge('inf', 12)) gain = gain.div(1e25)
+	if (hasChallenge('inf', 12)) gain = gain.times(1e100)
+	if (inChallenge('inf', 13)) gain = log2(gain)
+	if (hasChallenge('inf', 13)) gain = gain.pow(1.09)
 	return gain
 }
 	
@@ -111,7 +121,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.points.gte(new Decimal("1.79769e308"))
+	return player.points.gte(new Decimal("1e750"))
 }
 
 

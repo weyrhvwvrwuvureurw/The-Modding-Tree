@@ -123,7 +123,7 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
 description: "MULTIPLY points by how much insanity you have.",
 cost: new Decimal(15),
 effect() {
-    return player[this.layer].points.add(1).pow(1.205)
+    return player[this.layer].points.add(1).pow(0.92)
 },
 effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
 },
@@ -147,7 +147,7 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
 },
 21: {
     title: "funni",
-description: "Boost insanity based on themselves.",
+description: "Boost points based on insanity.",
 cost: new Decimal(35),
 effect() {
     return player[this.layer].points.max(Decimal.dOne).log2().add(Decimal.dOne).pow(0.0009)
@@ -156,10 +156,10 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
 },
 22: {
     title: "funi",
-description: "Boost insanity once again",
+description: "Boost points once again",
 cost: new Decimal(50),
 effect() {
-    return player.points.add(1).pow(0.0028)
+    return player[this.layer].add(1).pow(0.0028)
 },
 effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
 },
@@ -168,7 +168,7 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
 description: "Boost points ONCE AGAIN.",
 cost: new Decimal(75),
 effect() {
-    return player[this.layer].points.add(1).pow(0.02)
+    return player[this.layer].points.add(1).pow(0.0002)
 },
 effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
 },
@@ -177,7 +177,7 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
 description: "The three ones!",
 cost: new Decimal(111),
 effect() {
-    return player[this.layer].points.add(1).pow(0.0111)
+    return player[this.layer].points.add(1).pow(0.000111)
 },
 effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
 },
@@ -296,9 +296,50 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
     challenges: {
         11: {
             name: "Ouch",
-            challengeDescription: "^0.5 points",
+            challengeDescription: "^0.5 points.",
             canComplete: function() {return player.points.gte(1e40)},
             goalDescription: "Reach 1e40 pts.",
             rewardDescription: "^1.11 points."
         },
-}})
+        12: {
+            name: "Ouch",
+            challengeDescription: "/1e25 points.",
+            canComplete: function() {return player.points.gte(1e50)},
+            goalDescription: "Reach 1e50 pts.",
+            rewardDescription: "x1e100 points."
+        },
+        21: {
+            name: "Ouch",
+            challengeDescription: "log2 points.",
+            canComplete: function() {return player.points.gte(1e45)},
+            goalDescription: "Reach 1e45 pts.",
+            rewardDescription: "^1.095 points."
+        },
+    },       
+        milestones: {
+            0: {
+                requirementDescription: "Reach 100 IP.",
+                effectDescription: "x1e9 points.",
+                done() { return player[this.layer].points.gte(100) },
+                unlocked() { true }
+            },
+            1: {
+                requirementDescription: "Reach 500 IP.",
+                effectDescription: "x1e15 points.",
+                done() { return player[this.layer].points.gte(500) },
+                unlocked() { true }
+            },
+            2: {
+                requirementDescription: "Reach 10000 IP.",
+                effectDescription: "x1e35 points.",
+                done() { return player[this.layer].points.gte(10000) },
+                unlocked() { true }
+            },
+            3: {
+                requirementDescription: "Reach 1e6 IP.",
+                effectDescription: "^1.1 points.",
+                done() { return player[this.layer].points.gte(1e6) },
+                unlocked() { true }
+            },
+        },
+    })
