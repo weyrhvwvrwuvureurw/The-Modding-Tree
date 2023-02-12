@@ -123,7 +123,7 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
 description: "MULTIPLY points by how much insanity you have.",
 cost: new Decimal(15),
 effect() {
-    return player[this.layer].points.add(1).pow(15.2575)
+    return player[this.layer].points.add(1).pow(9.195)
 },
 effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
 },
@@ -150,7 +150,7 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
 description: "Boost insanity based on themselves.",
 cost: new Decimal(35),
 effect() {
-    return player[this.layer].points.max(Decimal.dOne).log2().add(Decimal.dOne).pow(0.924575)
+    return player[this.layer].points.max(Decimal.dOne).log2().add(Decimal.dOne).pow(0.0009)
 },
 effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
 },
@@ -261,9 +261,44 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
     description: "Boost points based on IP but UNbalanced.",
 cost: new Decimal(13),
 effect() {
-    return player[this.layer].points.max(Decimal.dOne).log2().add(Decimal.dOne).pow(0.452)
+    return player[this.layer].points.max(Decimal.dOne).log2().add(Decimal.dOne).pow(0.2855)
 },
-effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
+},
+22: {
+    title: "TI beta like",
+    description: "Boost points based on IP but a bit more balanced.",
+cost: new Decimal(20),
+effect() {
+    return player[this.layer].points.max(Decimal.dOne).log2().add(Decimal.dOne).pow(0.28497225)
+},
+effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
+},
+23: {
+    title: "TI gamma like",
+    description: "Boost points based on IP but very balanced.",
+cost: new Decimal(30),
+effect() {
+    return player[this.layer].points.max(Decimal.dOne).log2().add(Decimal.dOne).pow(0.28519874724285)
+},
+effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
+},
+24: {
+    title: "TI DELTA like",
+    description: "Boost points based on IP but very very balanced.",
+cost: new Decimal(50),
+effect() {
+    return player[this.layer].points.max(Decimal.dOne).log2().add(Decimal.dOne).pow(0.2852002083791095)
+},
+effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
 },
     },
-})
+    challenges: {
+        11: {
+            name: "Ouch",
+            challengeDescription: "description of ouchie",
+            canComplete: function() {return player.points.gte(1e40)},
+            goalDescription: "^0.5 points.",
+            rewardDescription: "^1.11 points."
+        },
+}})

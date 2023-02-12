@@ -88,6 +88,11 @@ function getPointGen() {
 	if (hasUpgrade('inf', 14)) gain = gain.pow(upgradeEffect('inf', 14));
 	if (hasUpgrade('inf', 15)) gain = gain.times(upgradeEffect('inf', 15));
 	if (hasUpgrade('inf', 21)) gain = gain.times(upgradeEffect('inf', 21));
+	if (hasUpgrade('inf', 22)) gain = gain.pow(upgradeEffect('inf', 22));
+	if (hasUpgrade('inf', 23)) gain = gain.pow(upgradeEffect('inf', 23));
+	if (hasUpgrade('inf', 24)) gain = gain.pow(upgradeEffect('inf', 24));
+	if (inChallenge('inf', 11)) gain = gain.pow(0.75)
+	if (hasChallenge('inf', 11)) gain = gain.pow(1.11)
 	return gain
 }
 	
