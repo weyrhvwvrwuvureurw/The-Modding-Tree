@@ -13,11 +13,13 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.0.3",
-	name: "Eternity.",
+	num: "0.0.4",
+	name: "Eternity oh wow.",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
+<h3>v0.0.4</h3><br>
+		- Added tons of upgrades.<br>
 <h3>v0.0.3</h3><br>
 		- Added Eternity, 3 challenges and an upgrade.<br>
 <h3>v0.0.2</h3><br>
@@ -115,7 +117,17 @@ function getPointGen() {
 	if (hasChallenge('inf', 15)) gain = gain.times(1e125)
 	if (inChallenge('inf', 16)) gain = log2(gain.pow(0.8))
 	if (hasChallenge('inf', 16)) gain = gain.pow(1.09)
-	if (hasUpgrade('e', 11)) gain = gain.pow(upgradeEffect('e', 11));
+	if (hasUpgrade('e', 11)) gain = gain.times(upgradeEffect('e', 11));
+	if (hasUpgrade('e', 12)) gain = gain.times(upgradeEffect('e', 12));
+	if (hasUpgrade('e', 13)) gain = gain.times(upgradeEffect('e', 13));
+	if (hasUpgrade('e', 14)) gain = gain.pow(upgradeEffect('e', 14));
+	if (hasUpgrade('e', 15)) gain = gain.times(696969);
+	if (hasUpgrade('e', 16)) gain = gain.times(6.9e69);
+	if (hasUpgrade('e', 21)) gain = gain.pow(upgradeEffect('e', 21));
+	if (hasUpgrade('e', 22)) gain = gain.pow(upgradeEffect('e', 22));
+	if (hasUpgrade('e', 23)) gain = gain.times(upgradeEffect('e', 23));
+	if (hasUpgrade('e', 24)) gain = gain.times(upgradeEffect('e', 24));
+	gain = gain.times(tmp.e.effect)
 	return gain
 }
 	

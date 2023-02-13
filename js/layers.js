@@ -335,7 +335,7 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
             canComplete: function() {return player.points.gte(1e40)},
             goalDescription: "Reach 1e40 pts.",
             rewardDescription: "^1.09 points.",
-            completionLimit: new Decimal("5"),
+            completionLimit: "5"
         },
     },       
         milestones: {
@@ -392,6 +392,20 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
             {key: "i", description: "I: Reset for insanity.", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
         ],
         layerShown(){return true},
+        effect(){
+            return Decimal.pow(1.25, player[this.layer].points)
+            /*
+              you should use this.layer instead of <layerID>
+              Decimal.pow(num1, num2) is an easier way to do
+              num1.pow(num2)
+            */
+          },
+          effectDescription(){
+            return "multiplying point gain by " + format(tmp[this.layer].effect)
+            /*
+              use format(num) whenever displaying a number
+            */
+          },
         upgrades: {
             11: {
                 title: "Eternity be like",
@@ -400,7 +414,80 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
             effect() {
                 return player[this.layer].points.add(1).pow(0.15)
             },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+        },
+        12: {
+                title: "Early TS's be like",
+            description: "Boost points based on EP again.",
+            cost: new Decimal(2),
+            effect() {
+                return player[this.layer].points.add(1).pow(0.150525)
+            },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+        },
+        13: {
+                title: "TD1, 2, 3, 4 be like",
+            description: "Boost points based on themselves AGAIN.",
+            cost: new Decimal(3),
+            effect() {
+                return player.points.max(Decimal.dOne).log2().add(Decimal.dOne).pow(0.0564)
+            },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+        },
+        14: {
+                title: "Oh wow.",
+            description: "EP boosts point's exponent.",
+            cost: new Decimal(5),
+            effect() {
+                return player[this.layer].points.add(1).ln().pow(0.072)
+            },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
+        },
+        15: {
+                title: "Nicenicenice.",
+            description: "x696969 points.",
+            cost: new Decimal(8),
+        },
+        16: {
+                title: "Nice go brrrr",
+            description: "x6.9 * 10 ^ 69 points.",
+            cost: new Decimal(12),       
+        },
+        21: {
+                title: "Very cool I guess.",
+            description: "EP boosts point exponent again.",
+            cost: new Decimal(18),
+            effect() {
+                return player[this.layer].points.add(1).log().pow(0.1)
+            },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
+        },
+        22: {
+                title: "VERY NICE UPGRADES",
+            description: "Boost points even more.",
+            cost: new Decimal(30),
+            effect() {
+                return player[this.layer].points.add(1).log2(player[this.layer].points).pow(0.06)
+            },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
+        },
+        23: {
+                title: "Oh, TIMEWALLS",
+            description: "Boost points based on EP.",
+            cost: new Decimal(65),
+            effect() {
+                return player[this.layer].points.add(1).pow(0.119)
+            },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+        },
+        24: {
+                title: "Bruh",
+            description: "Boost points based on EP more.",
+            cost: new Decimal(90),
+            effect() {
+                return player[this.layer].points.add(1).pow(0.13)
+            },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
         },
         },
     })
