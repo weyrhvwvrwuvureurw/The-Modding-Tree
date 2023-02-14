@@ -13,11 +13,13 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.0.4",
-	name: "Eternity oh wow.",
+	num: "0.1",
+	name: "YOO.",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
+<h3>v0.1</h3><br>
+		- Added 6 ECs.<br>
 <h3>v0.0.4</h3><br>
 		- Added tons of upgrades.<br>
 <h3>v0.0.3</h3><br>
@@ -101,22 +103,22 @@ function getPointGen() {
 	if (hasUpgrade('inf', 22)) gain = gain.pow(upgradeEffect('inf', 22));
 	if (hasUpgrade('inf', 23)) gain = gain.pow(upgradeEffect('inf', 23));
 	if (hasUpgrade('inf', 24)) gain = gain.pow(upgradeEffect('inf', 24));
-	if (inChallenge('inf', 11)) gain = gain.pow(0.5)
-	if (hasChallenge('inf', 11)) gain = gain.pow(1.11)
-	if (hasMilestone('inf', 0)) gain = gain.times(1e9)
-	if (hasMilestone('inf', 1)) gain = gain.times(1e15)
-	if (hasMilestone('inf', 2)) gain = gain.times(1e35)
-	if (hasMilestone('inf', 3)) gain = gain.pow(1.1)
-	if (inChallenge('inf', 12)) gain = gain.div(1e25)
-	if (hasChallenge('inf', 12)) gain = gain.times(1e100)
-	if (inChallenge('inf', 13)) gain = log2(gain)
-	if (hasChallenge('inf', 13)) gain = gain.pow(1.095)
-	if (inChallenge('inf', 14)) gain = gain.pow(0.4)
-	if (hasChallenge('inf', 14)) gain = gain.pow(1.0975)
-	if (inChallenge('inf', 15)) gain = gain.div(1e35)
-	if (hasChallenge('inf', 15)) gain = gain.times(1e125)
-	if (inChallenge('inf', 16)) gain = log2(gain.pow(0.8))
-	if (hasChallenge('inf', 16)) gain = gain.pow(1.09)
+	if (inChallenge('inf', 11)) gain = gain.pow(0.5);
+	if (hasChallenge('inf', 11)) gain = gain.pow(1.11);
+	if (hasMilestone('inf', 0)) gain = gain.times(1e9);
+	if (hasMilestone('inf', 1)) gain = gain.times(1e15);
+	if (hasMilestone('inf', 2)) gain = gain.times(1e35);
+	if (hasMilestone('inf', 3)) gain = gain.pow(1.1);
+	if (inChallenge('inf', 12)) gain = gain.div(1e25);
+	if (hasChallenge('inf', 12)) gain = gain.times(1e100);
+	if (inChallenge('inf', 13)) gain = log2(gain);
+	if (hasChallenge('inf', 13)) gain = gain.pow(1.095);
+	if (inChallenge('inf', 14)) gain = gain.pow(0.4);
+	if (hasChallenge('inf', 14)) gain = gain.pow(1.0975);
+	if (inChallenge('inf', 15)) gain = gain.div(1e35);
+	if (hasChallenge('inf', 15)) gain = gain.times(1e125);
+	if (inChallenge('inf', 16)) gain = log2(gain.pow(0.8));
+	if (hasChallenge('inf', 16)) gain = gain.pow(1.09);
 	if (hasUpgrade('e', 11)) gain = gain.times(upgradeEffect('e', 11));
 	if (hasUpgrade('e', 12)) gain = gain.times(upgradeEffect('e', 12));
 	if (hasUpgrade('e', 13)) gain = gain.times(upgradeEffect('e', 13));
@@ -127,6 +129,18 @@ function getPointGen() {
 	if (hasUpgrade('e', 22)) gain = gain.pow(upgradeEffect('e', 22));
 	if (hasUpgrade('e', 23)) gain = gain.times(upgradeEffect('e', 23));
 	if (hasUpgrade('e', 24)) gain = gain.times(upgradeEffect('e', 24));
+	if (inChallenge('e', 11)) gain = gain.pow(0.3);
+	if (hasChallenge('e', 11)) gain = gain.pow(1.2);
+	if (inChallenge('e', 12)) gain = gain.div(1e125);
+	if (hasChallenge('e', 12)) gain = gain.times(1e200);
+	if (inChallenge('e', 13)) gain = log(gain);
+	if (hasChallenge('e', 13)) gain = gain.pow(1.1);
+	if (inChallenge('e', 14)) gain = gain.div(upgradeEffect('i', 15));
+	if (hasChallenge('e', 14)) gain = gain.pow(1.16);
+	if (inChallenge('e', 15)) gain = gain.log2(gain.pow(0.5));
+	if (hasChallenge('e', 15)) gain = gain.times(1e500);
+	if (inChallenge('e', 16)) gain = gain.div(upgradeEffect('i', 14));
+	if (hasChallenge('e', 16)) gain = gain.pow(1.111);
 	gain = gain.times(tmp.e.effect)
 	return gain
 }
@@ -142,7 +156,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.e.points.gte(new Decimal("100"))
+	return player.e.points.gte(new Decimal("1e8"))
 }
 
 

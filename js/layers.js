@@ -439,7 +439,7 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
             description: "EP boosts point's exponent.",
             cost: new Decimal(5),
             effect() {
-                return player[this.layer].points.add(1).ln().pow(0.072)
+                return player[this.layer].points.add(1).pow(0.072).log2()
             },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
         },
@@ -489,5 +489,49 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
             },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
         },
+        },
+        challenges: {
+            11: {
+                name: "Eternity Challenge 1",
+                challengeDescription: "^0.3 points.",
+                canComplete: function() {return player.e.points.gte(1)},
+                goalDescription: "Reach 1EP.",
+                rewardDescription: "+0.2 point exponent."
+            },
+            12: {
+                name: "Eternity Challenge 2",
+                challengeDescription: "/1e125 points.",
+                canComplete: function() {return player.e.points.gte(1)},
+                goalDescription: "Reach 1EP.",
+                rewardDescription: "x1e200 points."
+            },
+            21: {
+                name: "Eternity Challenge 3",
+                challengeDescription: "log e points.",
+                canComplete: function() {return player.e.points.gte(1)},
+                goalDescription: "Reach 1EP.",
+                rewardDescription: "^1.1 points."
+            },
+            22: {
+                name: "Eternity Challenge 4",
+                challengeDescription: "IU15 is disabled.",
+                canComplete: function() {return player.e.points.gte(1)},
+                goalDescription: "Reach 1EP.",
+                rewardDescription: "+0.16 point's exponent."
+            },
+            31: {
+                name: "Eternity Challenge 5",
+                challengeDescription: "log2 and ^0.5 points.",
+                canComplete: function() {return player.e.points.gte(1)},
+                goalDescription: "Reach 1EP.",
+                rewardDescription: "x1e500 points."
+            },
+            32: {
+                name: "Eternity Challenge 6",
+                challengeDescription: "IU14 is disabled.",
+                canComplete: function() {return player.e.points.gte(1)},
+                goalDescription: "Reach 1EP.",
+                rewardDescription: "^1.111 points.",
+            },
         },
     })
