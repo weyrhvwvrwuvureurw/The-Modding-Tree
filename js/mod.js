@@ -13,11 +13,13 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.1",
-	name: "YOO.",
+	num: "0.1.1",
+	name: "ETERNITY GO BRRRRR",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
+<h3>v0.1.1</h3><br>
+		- Added 6 more ECs and 5 milestones.<br>
 <h3>v0.1</h3><br>
 		- Added 6 ECs.<br>
 <h3>v0.0.4</h3><br>
@@ -109,16 +111,17 @@ function getPointGen() {
 	if (hasMilestone('inf', 1)) gain = gain.times(1e15);
 	if (hasMilestone('inf', 2)) gain = gain.times(1e35);
 	if (hasMilestone('inf', 3)) gain = gain.pow(1.1);
+	if (hasMilestone('inf', 4)) gain = gain.pow(2);
 	if (inChallenge('inf', 12)) gain = gain.div(1e25);
 	if (hasChallenge('inf', 12)) gain = gain.times(1e100);
-	if (inChallenge('inf', 13)) gain = log2(gain);
-	if (hasChallenge('inf', 13)) gain = gain.pow(1.095);
-	if (inChallenge('inf', 14)) gain = gain.pow(0.4);
-	if (hasChallenge('inf', 14)) gain = gain.pow(1.0975);
-	if (inChallenge('inf', 15)) gain = gain.div(1e35);
-	if (hasChallenge('inf', 15)) gain = gain.times(1e125);
-	if (inChallenge('inf', 16)) gain = log2(gain.pow(0.8));
-	if (hasChallenge('inf', 16)) gain = gain.pow(1.09);
+	if (inChallenge('inf', 21)) gain = log2(gain);
+	if (hasChallenge('inf', 21)) gain = gain.pow(1.095);
+	if (inChallenge('inf', 22)) gain = gain.pow(0.4);
+	if (hasChallenge('inf', 22)) gain = gain.pow(1.0975);
+	if (inChallenge('inf', 31)) gain = gain.div(1e35);
+	if (hasChallenge('inf', 31)) gain = gain.times(1e125);
+	if (inChallenge('inf', 32)) gain = log2(gain.pow(0.8));
+	if (hasChallenge('inf', 32)) gain = gain.pow(1.09);
 	if (hasUpgrade('e', 11)) gain = gain.times(upgradeEffect('e', 11));
 	if (hasUpgrade('e', 12)) gain = gain.times(upgradeEffect('e', 12));
 	if (hasUpgrade('e', 13)) gain = gain.times(upgradeEffect('e', 13));
@@ -133,14 +136,31 @@ function getPointGen() {
 	if (hasChallenge('e', 11)) gain = gain.pow(1.2);
 	if (inChallenge('e', 12)) gain = gain.div(1e125);
 	if (hasChallenge('e', 12)) gain = gain.times(1e200);
-	if (inChallenge('e', 13)) gain = log(gain);
-	if (hasChallenge('e', 13)) gain = gain.pow(1.1);
-	if (inChallenge('e', 14)) gain = gain.div(upgradeEffect('i', 15));
-	if (hasChallenge('e', 14)) gain = gain.pow(1.16);
-	if (inChallenge('e', 15)) gain = gain.log2(gain.pow(0.5));
-	if (hasChallenge('e', 15)) gain = gain.times(1e500);
-	if (inChallenge('e', 16)) gain = gain.div(upgradeEffect('i', 14));
-	if (hasChallenge('e', 16)) gain = gain.pow(1.111);
+	if (inChallenge('e', 21)) gain = ln(gain);
+	if (hasChallenge('e', 21)) gain = gain.pow(1.1);
+	if (inChallenge('e', 22)) gain = gain.div(upgradeEffect('i', 15));
+	if (hasChallenge('e', 22)) gain = gain.pow(1.16);
+	if (inChallenge('e', 31)) gain = gain.log2(gain.pow(0.5));
+	if (hasChallenge('e', 31)) gain = gain.times(1e500);
+	if (inChallenge('e', 32)) gain = gain.div(upgradeEffect('i', 14));
+	if (hasChallenge('e', 32)) gain = gain.pow(1.111);
+	if (inChallenge('e', 41)) gain = gain.pow(0.2);
+	if (hasChallenge('e', 41)) gain = gain.pow(1.25);
+	if (inChallenge('e', 42)) gain = gain.div(1e300);
+	if (hasChallenge('e', 42)) gain = gain.pow(1.09);
+	if (inChallenge('e', 51)) gain = ln(gain.pow(0.6));
+	if (hasChallenge('e', 51)) gain = gain.pow(1.1);
+	if (inChallenge('e', 52)) gain = gain.div(upgradeEffect('i', 15).times((upgradeEffect('i', 14))));
+	if (hasChallenge('e', 52)) gain = gain.pow(1.2);
+	if (inChallenge('e', 61)) gain = gain.log2(gain.pow(0.35).div(1e50));
+	if (hasChallenge('e', 61)) gain = gain.times(1e1111);
+	if (inChallenge('e', 62)) gain = gain.div(upgradeEffect('i', 15).times((upgradeEffect('i', 14)).times((upgradeEffect('i', 16))).times((upgradeEffect('i', 17)))));
+	if (hasChallenge('e', 62)) gain = gain.pow(1.111);
+	if (hasMilestone('e', 0)) gain = gain.times(1e9);
+	if (hasMilestone('e', 1)) gain = gain.times(1e15);
+	if (hasMilestone('e', 2)) gain = gain.times(1e35);
+	if (hasMilestone('e', 3)) gain = gain.pow(1.1);
+	if (hasMilestone('e', 4)) gain = gain.pow(2);
 	gain = gain.times(tmp.e.effect)
 	return gain
 }
@@ -156,7 +176,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.e.points.gte(new Decimal("1e8"))
+	return player.e.points.gte(new Decimal("1e20"))
 }
 
 

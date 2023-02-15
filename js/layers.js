@@ -86,6 +86,7 @@ addLayer("i", {
         return new Decimal(1.012)
     },
     row: 1, // Row the layer is in on the tree (0 is the first row)
+    branches: ['prestige'],
     hotkeys: [
         {key: "i", description: "I: Reset for insanity.", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
@@ -205,8 +206,9 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
             return new Decimal(1.02)
         },
         row: 1, // Row the layer is in on the tree (0 is the first row)
+        branches: ['prestige'],
         hotkeys: [
-            {key: "i", description: "I: Reset for insanity.", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+            {key: "n", description: "N: Reset for IP.", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
         ],
         layerShown(){return true},
         
@@ -363,6 +365,12 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
                 done() { return player[this.layer].points.gte(1e6) },
                 unlocked() { true }
             },
+            4: {
+                requirementDescription: "Reach 1e7 IP.",
+                effectDescription: "^2 points.",
+                done() { return player[this.layer].points.gte(1e7) },
+                unlocked() { true }
+            },
         },
     })
     addLayer("e", {
@@ -388,12 +396,13 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
             return new Decimal(1.012)
         },
         row: 2, // Row the layer is in on the tree (0 is the first row)
+        branches: ['insanity', 'infinity'],
         hotkeys: [
-            {key: "i", description: "I: Reset for insanity.", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+            {key: "e", description: "E: Reset for EP.", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
         ],
         layerShown(){return true},
         effect(){
-            return Decimal.pow(1.25, player[this.layer].points)
+            return player[this.layer].points.max(1).pow(5).log10().max(1)
             /*
               you should use this.layer instead of <layerID>
               Decimal.pow(num1, num2) is an easier way to do
@@ -533,5 +542,80 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
                 goalDescription: "Reach 1EP.",
                 rewardDescription: "^1.111 points.",
             },
+            41: {
+                name: "Eternity Challenge 7",
+                challengeDescription: "^0.2 points.",
+                canComplete: function() {return player.e.points.gte(1)},
+                goalDescription: "Reach 1EP.",
+                rewardDescription: "+0.25 point exponent."
+            },
+            42: {
+                name: "Eternity Challenge 8",
+                challengeDescription: "/1e300 points.",
+                canComplete: function() {return player.e.points.gte(1)},
+                goalDescription: "Reach 1EP.",
+                rewardDescription: "^1.09 points."
+            },
+            51: {
+                name: "Eternity Challenge 9",
+                challengeDescription: "ln and ^0.6 points.",
+                canComplete: function() {return player.e.points.gte(1)},
+                goalDescription: "Reach 1EP.",
+                rewardDescription: "^1.1 points."
+            },
+            52: {
+                name: "Eternity Challenge 10",
+                challengeDescription: "IU14 and 15 are disabled.",
+                canComplete: function() {return player.e.points.gte(1)},
+                goalDescription: "Reach 1EP.",
+                rewardDescription: "+0.2 point's exponent."
+            },
+            61: {
+                name: "Eternity Challenge 11",
+                challengeDescription: "log2 and ^0.35 and /1e50 points.",
+                canComplete: function() {return player.e.points.gte(1)},
+                goalDescription: "Reach 1EP.",
+                rewardDescription: "x1e1111 points."
+            },
+            62: {
+                name: "Eternity Challenge 12",
+                challengeDescription: "IU14 - 17 are disabled.",
+                canComplete: function() {return player.e.points.gte(1)},
+                goalDescription: "Reach 1EP.",
+                rewardDescription: "+0.2 point expo.",
+            },
         },
-    })
+        milestones: {
+            0: {
+                requirementDescription: "Reach 100 EP.",
+                effectDescription: "x1e6000 points.",
+                done() { return player[this.layer].points.gte(100) },
+                unlocked() { true }
+            },
+            1: {
+                requirementDescription: "Reach 500 EP.",
+                effectDescription: "+0.2 point expo.",
+                done() { return player[this.layer].points.gte(500) },
+                unlocked() { true }
+            },
+            2: {
+                requirementDescription: "Reach 10000 EP.",
+                effectDescription: "^1.1 points.",
+                done() { return player[this.layer].points.gte(10000) },
+                unlocked() { true }
+            },
+            3: {
+                requirementDescription: "Reach 1e6 EP.",
+                effectDescription: "x1e75000 points.",
+                done() { return player[this.layer].points.gte(1e6) },
+                unlocked() { true }
+            },
+            4: {
+                requirementDescription: "Reach 1e7 EP.",
+                effectDescription: "^1.111111 points.",
+                done() { return player[this.layer].points.gte(1e7) },
+                unlocked() { true }
+            },
+        },
+     },  
+)
