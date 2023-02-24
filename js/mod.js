@@ -1,7 +1,7 @@
 let modInfo = {
 	name: "The Unbalanced Tree",
-	id: "844",
-	author: "nobody",
+	id: "tutr",
+	author: "me",
 	pointsName: "points",
 	modFiles: ["layers.js", "tree.js"],
 
@@ -13,11 +13,14 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.1.1",
-	name: "ETERNITY GO BRRRRR",
+	num: "0.1.2",
+	name: "Reality...",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
+<h3>v0.1.2</h3><br>
+		- Added REALITY!!!<br>
+		- Bumped Endgame to ~500 RG.<br>
 <h3>v0.1.1</h3><br>
 		- Added 6 more ECs and 5 milestones.<br>
 <h3>v0.1</h3><br>
@@ -161,7 +164,12 @@ function getPointGen() {
 	if (hasMilestone('e', 2)) gain = gain.times(1e35);
 	if (hasMilestone('e', 3)) gain = gain.pow(1.1);
 	if (hasMilestone('e', 4)) gain = gain.pow(2);
+	if (hasUpgrade('r', 11)) gain = gain.times(1e100000);
+	if (inChallenge('r', 11)) gain = gain.pow(gain.pow(0.75));
+	if (hasChallenge('r', 11)) gain = gain.times(1e1500000);
+	if (hasUpgrade('r', 12)) gain = gain.times(upgradeEffect('r', 12));
 	gain = gain.times(tmp.e.effect)
+	gain = gain.times(tmp.r.effect)
 	return gain
 }
 	
@@ -176,7 +184,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.e.points.gte(new Decimal("1e20"))
+	return player.r.points.gte(new Decimal("500"))
 }
 
 

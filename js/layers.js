@@ -14,7 +14,7 @@ addLayer("p", {
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.5, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
-        mult = new Decimal(2)
+        mult = new Decimal(1)
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -79,7 +79,8 @@ addLayer("i", {
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.04, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
-        mult = new Decimal(6)
+        mult = new Decimal(1)
+        if (hasUpgrade('r', 14)) mult = mult.times(upgradeEffect('r', 14))
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -199,7 +200,8 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
         type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
         exponent: 0.05, // Prestige currency exponent
         gainMult() { // Calculate the multiplier for main currency from bonuses
-            mult = new Decimal(9)
+            mult = new Decimal(1)
+            if (hasUpgrade('r', 14)) mult = mult.times(upgradeEffect('r', 14))
             return mult
         },
         gainExp() { // Calculate the exponent on main currency from bonuses
@@ -382,14 +384,14 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
             points: new Decimal(0),
         }},
         color: "#B341E0",
-        requires: new Decimal("1.79769e308"), // Can be a function that takes requirement increases into account
+        requires: new Decimal("1e15"), // Can be a function that takes requirement increases into account
         resource: "eternity points", // Name of prestige currency
         baseResource: "infinity points", // Name of resource prestige is based on
         baseAmount() {return player.inf.points}, // Get the current amount of baseResource
         type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
         exponent: 0.0215, // Prestige currency exponent
         gainMult() { // Calculate the multiplier for main currency from bonuses
-            mult = new Decimal(6)
+            mult = new Decimal(1)
             return mult
         },
         gainExp() { // Calculate the exponent on main currency from bonuses
@@ -467,7 +469,7 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
             description: "EP boosts point exponent again.",
             cost: new Decimal(18),
             effect() {
-                return player[this.layer].points.add(1).log().pow(0.1)
+                return player[this.layer].points.add(1).pow(0.02312)
             },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
         },
@@ -619,3 +621,88 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
         },
      },  
 )
+addLayer("r", {
+    name: "reality", // This is optional, only used in a few places, If absent it just uses the layer id.
+    symbol: "R", // This appears on the layer's node. Default is the id with the first letter capitalized
+    position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+    startData() { return {
+        unlocked: false,
+        points: new Decimal(0),
+    }},
+    color: "#02F3A3",
+    requires: new Decimal("1e10"), // Can be a function that takes requirement increases into account
+    resource: "reality generators", // Name of prestige currency
+    baseResource: "EP", // Name of resource prestige is based on
+    baseAmount() {return player.e.points}, // Get the current amount of baseResource
+    type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
+    exponent: 0.0215, // Prestige currency exponent
+    gainMult() { // Calculate the multiplier for main currency from bonuses
+        mult = new Decimal(1)
+        if (hasUpgrade('r', 13)) mult = mult.times(upgradeEffect('r', 13))
+        return mult
+    },
+    gainExp() { // Calculate the exponent on main currency from bonuses
+        return new Decimal(1.012)
+    },
+    row: 2, // Row the layer is in on the tree (0 is the first row)
+    branches: ['insanity', 'infinity'],
+    hotkeys: [
+        {key: "r", description: "R: Reset for RG.", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+    ],
+    layerShown(){return true},
+    effect(){
+        return Decimal.pow(1.052, player[this.layer].points)
+        /*
+          you should use this.layer instead of <layerID>
+          Decimal.pow(num1, num2) is an easier way to do
+          num1.pow(num2)
+        */
+      },
+      effectDescription(){
+        return "multiplying point gain by " + format(tmp[this.layer].effect)
+        /*
+          use format(num) whenever displaying a number
+        */
+      },
+      upgrades: {
+        11: {
+            title: "Start Over",
+        description: "x1e100,000 points.",
+        cost: new Decimal(1),
+        12: {
+            title: "Oh Great.",
+        description: "Boost point gain based on themselves a gain.",
+        cost: new Decimal(2),
+        effect() {
+            return player.points.max(Decimal.dOne).log10().add(Decimal.dOne).pow(0.7)
+        },
+        effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+        13: {
+            title: "Finally this upgrade.",
+        description: "Boost RG gain based on themselves.",
+        cost: new Decimal(3),
+        effect() {
+            return player.r.points.max(Decimal.dOne).log10().add(Decimal.dOne).pow(0.1)
+        },
+        effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+  },
+  14: {
+    title: "Noice.",
+description: "Boost IP and I based on RG.",
+cost: new Decimal(4),
+effect() {
+    return player.r.points.times(player.r.points.pow(2.71828459))
+},
+effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+},
+  },
+     challenges: {
+        11: {
+            name: "Dilation",
+            challengeDescription: "Expo of points is ^0.75.",
+            canComplete: function() {return player.r.points.gte(1)},
+            goalDescription: "Reach 1 Reality Generator.",
+            rewardDescription: "Multiply points by a lot.",
+     },
+   },
+}}})
