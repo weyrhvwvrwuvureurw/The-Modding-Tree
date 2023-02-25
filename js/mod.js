@@ -21,6 +21,7 @@ let changelog = `<h1>Changelog:</h1><br>
 <h3>v0.1.3</h3><br>
 		- Added more upgrades, 3 challenges and fixed balancing issues.<br>
 		- Bumped Endgame to ~5000 RG.<br>
+		- Note: game is finished!
 <h3>v0.1.2</h3><br>
 		- Added REALITY!!!<br>
 		- Bumped Endgame to ~500 RG.<br>
