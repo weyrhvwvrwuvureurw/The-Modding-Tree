@@ -15,6 +15,7 @@ addLayer("p", {
     exponent: 0.5, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
+        if (inChallenge('r', 13)) mult = mult.pow(0.5)
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -81,6 +82,7 @@ addLayer("i", {
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         if (hasUpgrade('r', 14)) mult = mult.times(upgradeEffect('r', 14))
+        if (inChallenge('r', 13)) mult = mult.pow(0.5)
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -202,6 +204,7 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
         gainMult() { // Calculate the multiplier for main currency from bonuses
             mult = new Decimal(1)
             if (hasUpgrade('r', 14)) mult = mult.times(upgradeEffect('r', 14))
+            if (inChallenge('r', 13)) mult = mult.pow(0.5)
             return mult
         },
         gainExp() { // Calculate the exponent on main currency from bonuses
@@ -267,7 +270,7 @@ cost: new Decimal(13),
 effect() {
     return player[this.layer].points.max(Decimal.dOne).log2().add(Decimal.dOne).pow(0.2855)
 },
-effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
+effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
 },
 22: {
     title: "TI beta like",
@@ -276,7 +279,7 @@ cost: new Decimal(20),
 effect() {
     return player[this.layer].points.max(Decimal.dOne).log2().add(Decimal.dOne).pow(0.28497225)
 },
-effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
+effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
 },
 23: {
     title: "TI gamma like",
@@ -285,7 +288,7 @@ cost: new Decimal(30),
 effect() {
     return player[this.layer].points.max(Decimal.dOne).log2().add(Decimal.dOne).pow(0.28519874724285)
 },
-effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
+effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
 },
 24: {
     title: "TI DELTA like",
@@ -294,7 +297,7 @@ cost: new Decimal(50),
 effect() {
     return player[this.layer].points.max(Decimal.dOne).log2().add(Decimal.dOne).pow(0.2852002083791095)
 },
-effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
+effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
 },
     },
     challenges: {
@@ -392,6 +395,9 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"^" },
         exponent: 0.0215, // Prestige currency exponent
         gainMult() { // Calculate the multiplier for main currency from bonuses
             mult = new Decimal(1)
+            if (inChallenge('r', 13)) mult = mult.pow(0.5)
+            if (hasChallenge('r', 13)) mult = mult.times(1e100)
+            if (hasUpgrade('r', 11)) mult = mult.times(1e10)
             return mult
         },
         gainExp() { // Calculate the exponent on main currency from bonuses
@@ -634,11 +640,14 @@ addLayer("r", {
     resource: "reality generators", // Name of prestige currency
     baseResource: "EP", // Name of resource prestige is based on
     baseAmount() {return player.e.points}, // Get the current amount of baseResource
-    type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
+    type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.0215, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         if (hasUpgrade('r', 13)) mult = mult.times(upgradeEffect('r', 13))
+        if (hasChallenge('r', 11)) mult = mult.times(2)
+        if (hasChallenge('r', 12)) mult = mult.times(3)
+        if (hasChallenge('r', 13)) mult = mult.times(150)
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -666,9 +675,10 @@ addLayer("r", {
       },
       upgrades: {
         11: {
-            title: "Start Over",
-        description: "x1e100,000 points.",
+        title: "Hi",
+        description: "x1e10 EP.",
         cost: new Decimal(1),
+    },
         12: {
             title: "Oh Great.",
         description: "Boost point gain based on themselves a gain.",
@@ -677,6 +687,7 @@ addLayer("r", {
             return player.points.max(Decimal.dOne).log10().add(Decimal.dOne).pow(0.7)
         },
         effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+    },
         13: {
             title: "Finally this upgrade.",
         description: "Boost RG gain based on themselves.",
@@ -702,7 +713,21 @@ effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
             challengeDescription: "Expo of points is ^0.75.",
             canComplete: function() {return player.r.points.gte(1)},
             goalDescription: "Reach 1 Reality Generator.",
-            rewardDescription: "Multiply points by a lot.",
+            rewardDescription: "Double RG.",
      },
+     12: {
+        name: "Dilation^2",
+        challengeDescription: "Expo of points is ^0.57.",
+        canComplete: function() {return player.r.points.gte(1)},
+        goalDescription: "Reach 1 Reality Generator.",
+        rewardDescription: "Triple RG.",
+ },
+ 13: {
+    name: "Dilation^3",
+    challengeDescription: "Expo of points is ^0.42 and every currency is ^0.5 except RG.",
+    canComplete: function() {return player.r.points.gte(1)},
+    goalDescription: "Reach 1 Reality Generator.",
+    rewardDescription: "x150 RG and x1e100 EP.",
+},
    },
-}}})
+})

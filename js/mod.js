@@ -6,18 +6,21 @@ let modInfo = {
 	modFiles: ["layers.js", "tree.js"],
 
 	discordName: "",
-	discordLink: "",
+	discordLink: "https://discord.gg/ySEkYU7eku",
 	initialStartPoints: new Decimal (10), // Used for hard resets and new players
 	offlineLimit: 100000000000,  // In hours
 }
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.1.2",
-	name: "Reality...",
+	num: "0.1.3",
+	name: "Dilation CUBED!!??!",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
+<h3>v0.1.3</h3><br>
+		- Added more upgrades, 3 challenges and fixed balancing issues.<br>
+		- Bumped Endgame to ~5000 RG.<br>
 <h3>v0.1.2</h3><br>
 		- Added REALITY!!!<br>
 		- Bumped Endgame to ~500 RG.<br>
@@ -105,9 +108,9 @@ function getPointGen() {
 	if (hasUpgrade('inf', 14)) gain = gain.pow(upgradeEffect('inf', 14));
 	if (hasUpgrade('inf', 15)) gain = gain.times(upgradeEffect('inf', 15));
 	if (hasUpgrade('inf', 21)) gain = gain.times(upgradeEffect('inf', 21));
-	if (hasUpgrade('inf', 22)) gain = gain.pow(upgradeEffect('inf', 22));
-	if (hasUpgrade('inf', 23)) gain = gain.pow(upgradeEffect('inf', 23));
-	if (hasUpgrade('inf', 24)) gain = gain.pow(upgradeEffect('inf', 24));
+	if (hasUpgrade('inf', 22)) gain = gain.times(upgradeEffect('inf', 22));
+	if (hasUpgrade('inf', 23)) gain = gain.times(upgradeEffect('inf', 23));
+	if (hasUpgrade('inf', 24)) gain = gain.times(upgradeEffect('inf', 24));
 	if (inChallenge('inf', 11)) gain = gain.pow(0.5);
 	if (hasChallenge('inf', 11)) gain = gain.pow(1.11);
 	if (hasMilestone('inf', 0)) gain = gain.times(1e9);
@@ -164,10 +167,10 @@ function getPointGen() {
 	if (hasMilestone('e', 2)) gain = gain.times(1e35);
 	if (hasMilestone('e', 3)) gain = gain.pow(1.1);
 	if (hasMilestone('e', 4)) gain = gain.pow(2);
-	if (hasUpgrade('r', 11)) gain = gain.times(1e100000);
 	if (inChallenge('r', 11)) gain = gain.pow(gain.pow(0.75));
-	if (hasChallenge('r', 11)) gain = gain.times(1e1500000);
 	if (hasUpgrade('r', 12)) gain = gain.times(upgradeEffect('r', 12));
+	if (inChallenge('r', 12)) gain = gain.pow(gain.pow(0.57));
+	if (inChallenge('r', 12)) gain = gain.pow(gain.pow(0.42));
 	gain = gain.times(tmp.e.effect)
 	gain = gain.times(tmp.r.effect)
 	return gain
@@ -184,7 +187,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.r.points.gte(new Decimal("500"))
+	return player.r.points.gte(new Decimal("5000"))
 }
 
 
