@@ -13,21 +13,21 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.001",
-	name: "Mostly Nothing",
+	num: "0.002",
+	name: "More Stuff",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
-<h3>v0.0</h3><br>
+<h3>v0.002</h3><br>
+		- Added 4 more upgrades.<br>
+		- Added a challenge and a milestone.<br>
+<h3>v0.001</h3><br>
 		- Added 4 upgrades.<br>
-		- Added a challenge.<br>
-		<h3>v0.0</h3><br>
-		- Added things.<br>
-		- Added stuff.`
+		- Added a challenge.`
 
 		
 
-let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
+let winText = `Congratulations! You have reached the end and beaten this game, but only for now...`
 
 // If you add new functions anywhere inside of a layer, and those functions have an effect when called, add them here.
 // (The ones here are examples, all official functions are already taken care of)
@@ -49,7 +49,12 @@ function getPointGen() {
 	let gain = new Decimal(0.001)
 	if (hasUpgrade('s', 13)) gain = gain.times(2);
 	if (hasUpgrade('s', 14)) gain = gain.times(upgradeEffect('s', 14));
-	if (inChallenge('s', 11)) gain = gain.times(0.3);
+	if (inChallenge('s', 11)) gain = gain.times(Decimal.pow(0.3, challengeCompletions('s', 11)));
+	if (inChallenge('s', 12)) gain = gain.times(Decimal.pow(0.1, challengeCompletions('s', 12)));
+	if (hasChallenge('s', 12)) gain = gain.times(Decimal.pow(1.1, challengeCompletions('s', 12)));
+	if (hasUpgrade('s', 16)) gain = gain.times(upgradeEffect('s', 16));
+	if (hasUpgrade('s', 21)) gain = gain.times(5);
+	if (hasMilestone('s', 11)) gain = gain.times(3);
 	return gain
 }
 	
@@ -64,7 +69,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.points.gte(new Decimal("5"))
+	return player.points.gte(new Decimal("66"))
 }
 
 
