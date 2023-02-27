@@ -13,11 +13,13 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.003",
-	name: "Way More Stuff",
+	num: "0.004",
+	name: "Bit More Stuff",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
+<h3>v0.004</h3><br>
+		- Added 3 more upgrades and a milestone.<br>
 <h3>v0.003</h3><br>
 		- Added tons of stuff.<br>
 <h3>v0.002</h3><br>
@@ -59,6 +61,7 @@ function getPointGen() {
 	if (hasMilestone('s', 11)) gain = gain.times(3);
 	if (hasUpgrade('s', 22)) gain = gain.times(upgradeEffect('s', 22));
 	if (hasUpgrade('p', 11)) gain = gain.times(upgradeEffect('p', 11));
+
 	return gain
 }
 	
@@ -73,7 +76,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.p.points.gte(new Decimal("1"))
+	return player.p.points.gte(new Decimal("30"))
 }
 
 

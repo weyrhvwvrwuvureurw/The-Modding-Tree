@@ -20,10 +20,11 @@ addLayer("s", {
         if (hasChallenge('s', 11)) mult = mult.times(Decimal.pow(1.2, challengeCompletions('s', 11)));
         if (hasChallenge('s', 12)) mult = mult.times(Decimal.pow(1.4, challengeCompletions('s', 12)));
         if (hasUpgrade('s', 15)) mult = mult.times(upgradeEffect('s', 15));
-        if (hasMilestone('s', 11)) mult = mult.times(4);
+        if (hasMilestone('s', 1)) mult = mult.times(4);
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
+        if (hasMilestone('s', 3)) mult = mult.times(1.05);
         return new Decimal(1)
     },
     row: 0, // Row the layer is in on the tree (0 is the first row)
@@ -53,7 +54,7 @@ addLayer("s", {
             description: "Boost points based on themselves and unlock a challenge.",
             cost: new Decimal(4),
             effect() {
-                return player.points.add(1).pow(0.4)
+                return player.points.add(1).pow(0.1)
             },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
         },
@@ -71,7 +72,7 @@ addLayer("s", {
             description: "Boost points based on SP and unlock a challenge.",
             cost: new Decimal(7),
             effect() {
-                return player[this.layer].points.add(1).pow(0.5)
+                return player[this.layer].points.add(1).pow(0.2)
             },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
         },
@@ -85,7 +86,7 @@ addLayer("s", {
             description: "Boost points based on SP twice.",
             cost: new Decimal(10),
             effect() {
-                return player[this.layer].points.add(1).pow(0.51)
+                return player[this.layer].points.add(1).pow(0.21)
             },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
             unlocked() { return hasMilestone('s', 1)},
@@ -118,6 +119,18 @@ addLayer("s", {
             done() { return player[this.layer].points.gte(500) },
             unlocked() { return hasUpgrade('s', 21) },
         },
+        2: {
+            requirementDescription: "Get 3 PP. (2)",
+            effectDescription: "Double PP.",
+            done() { return player.p.points.gte(3) },
+            unlocked() { return hasUpgrade('p', 12) },
+        },
+        3: {
+            requirementDescription: "Get 15 PP. (3)",
+            effectDescription: "^1.05 SP.",
+            done() { return player.p.points.gte(15) },
+            unlocked() { return hasUpgrade('p', 22) },
+        },
     },
   }) 
   addLayer("p", {
@@ -134,9 +147,11 @@ addLayer("s", {
     baseResource: "points", // Name of resource prestige is based on
     baseAmount() {return player.points}, // Get the current amount of baseResource
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    exponent: 0.5,
+    exponent: 0.3,
        gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
+        if (hasMilestone('s', 2)) mult = mult.times(2);
+        if (hasUpgrade('p', 21)) mult = mult.times(3);
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -150,8 +165,26 @@ addLayer("s", {
         description: "PP boosts point gen.",
         cost: new Decimal(1),
         effect() {
-           return player[this.layer].points.add(2).pow(0.5)
+           let eff = player.p.points.plus(2).pow(0.5);
+           if (hasUpgrade("p", 12)) eff = eff.pow(2);
+           if (hasUpgrade("p", 22)) eff = eff.times(3);
+           return eff;
         },
         effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+    },
+    12: {
+        title: "Prestigious Insanity",
+        description: "<b>Prestige boost</b>'s effect is squared and unlock a milestone.",
+        cost: new Decimal(3),
+    },
+    21: {
+        title: "MORE MORE!!!",
+        description: "Triple PP.",
+        cost: new Decimal(7),
+    },
+    22: {
+        title: "MORE MORE!!!",
+        description: "Triple the <b>Prestige boost</b>'s effect and unlock another milestone.",
+        cost: new Decimal(7),
     },
 }})
