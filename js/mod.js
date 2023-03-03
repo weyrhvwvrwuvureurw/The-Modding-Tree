@@ -13,11 +13,13 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.005",
-	name: "Tons More Stuff",
+	num: "0.006",
+	name: "Noice.",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
+<h3>v0.006</h3><br>
+		- Added 3 milestones and 2 upgrades on each layer.<br>
 <h3>v0.005</h3><br>
 		- Added 2 layers.<br>
 <h3>v0.004</h3><br>
@@ -60,10 +62,11 @@ function getPointGen() {
 	if (hasChallenge('s', 12)) gain = gain.times(Decimal.pow(1.1, challengeCompletions('s', 12)));
 	if (hasUpgrade('s', 16)) gain = gain.times(upgradeEffect('s', 16));
 	if (hasUpgrade('s', 21)) gain = gain.times(5);
-	if (hasMilestone('s', 11)) gain = gain.times(3);
+	if (hasMilestone('s', 1)) gain = gain.times(3);
 	if (hasUpgrade('s', 22)) gain = gain.times(upgradeEffect('s', 22));
 	if (hasUpgrade('p', 11)) gain = gain.times(upgradeEffect('p', 11));
     gain = gain.times(tmp.b.effect);
+	if (hasMilestone('b', 2)) gain = gain.times(1e7);
 	return gain
 }
 	
@@ -78,7 +81,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.b.points.gte(new Decimal("1"))
+	return player.b.points.gte(new Decimal("20"))
 }
 
 

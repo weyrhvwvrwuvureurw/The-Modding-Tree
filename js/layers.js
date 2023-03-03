@@ -21,12 +21,14 @@ addLayer("s", {
         if (hasChallenge('s', 12)) mult = mult.times(Decimal.pow(1.4, challengeCompletions('s', 12)));
         if (hasUpgrade('s', 15)) mult = mult.times(upgradeEffect('s', 15));
         if (hasMilestone('s', 1)) mult = mult.times(4);
+        if (hasMilestone('b', 1)) mult = mult.times(1000);
         mult = mult.times(tmp.g.effect);
+        if (hasMilestone('s', 3)) mult = mult.pow(1.05);
+        if (hasUpgrade('b', 12)) mult = mult.pow(1.2);
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
-        if (hasMilestone('s', 3)) mult = mult.times(1.05);
-        return new Decimal(1)
+      return new Decimal(1)
     },
     row: 0, // Row the layer is in on the tree (0 is the first row)
     layerShown(){return true},
@@ -155,10 +157,13 @@ addLayer("s", {
         if (hasMilestone('s', 2)) mult = mult.times(2);
         if (hasUpgrade('p', 21)) mult = mult.times(3);
         if (hasUpgrade('p', 32)) mult = mult.times(10);
+        mult = mult.times(tmp.g.effect);
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
-        return new Decimal(1)
+        mult = new Decimal(1)
+        if (hasUpgrade('g', 12)) mult = mult.times(1.2);
+        return mult
     },
     row: 1, // Row the layer is in on the tree (0 is the first row)
     layerShown(){return true},
@@ -255,13 +260,51 @@ addLayer("b", {
     row: 2, // Row the layer is in on the tree (0 is the first row)
     layerShown(){return true},
     effect() {
-        let eff = Decimal.pow(3, player.b.points)
+        let eff = Decimal.pow(this.effBase, player.b.points)
         return eff;
        },
        effectDescription(){
-        return "multiplying point gain by " + format(tmp[this.layer].effect)
-      },
-})
+           return "multiplying point gain by " + format(tmp[this.layer].effect)
+         },
+         upgrades: {
+           11: {
+               title: "Booster",
+               description: "Add 0.05 to the Booster eff base",
+               cost: new Decimal(8),
+           },
+           12: {
+               title: "Booster^2",
+               description: "^1.2 SP",
+               cost: new Decimal(15),
+           },
+         },
+         milestones: {
+           1: {
+               requirementDescription: "Get 2 Boosters. (1)",
+               effectDescription: "x1000 SP.",
+               done() { return player[this.layer].points.gte(2) },
+               unlocked() { return player.g.unlocked },
+           },
+           2: {
+               requirementDescription: "Get 3 Boosters. (2)",
+               effectDescription: "x10000000 points.",
+               done() { return player[this.layer].points.gte(3) },
+               unlocked() { return hasMilestone('b', 1) },
+           },
+           3: {
+               requirementDescription: "Get 5 Boosters. (3)",
+               effectDescription: "Increase Booster eff base by 0.1.",
+               done() { return player[this.layer].points.gte(5) },
+               unlocked() { return hasMilestone('b', 2) },
+           },
+       },
+       effBase() {
+           let base = new Decimal(1.5);
+           if (hasMilestone('g', 3)) base = base.add(0.1);
+           if (hasUpgrade('b', 11)) base = base.add(0.05);
+           return base;
+       },
+    })
 addLayer("g", {
     name: "generators", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "G", // This appears on the layer's node. Default is the id with the first letter capitalized
@@ -287,10 +330,49 @@ addLayer("g", {
     row: 2, // Row the layer is in on the tree (0 is the first row)
     layerShown(){return true},
 effect() {
- let eff = Decimal.pow(2, player.g.points)
+ let eff = Decimal.pow(this.effBase, player.g.points)
  return eff;
 },
 effectDescription(){
     return "multiplying prestige point gain by " + format(tmp[this.layer].effect)
   },
+  upgrades: {
+    11: {
+        title: "Generator",
+        description: "Add 0.05 to the Gen eff base",
+        cost: new Decimal(8),
+    },
+    12: {
+        title: "Generator^2",
+        description: "^1.015 PP",
+        cost: new Decimal(15),
+    },
+  },
+  milestones: {
+    1: {
+        requirementDescription: "Get 2 Generators. (1)",
+        effectDescription: "Increase Gen eff base by 0.1.",
+        done() { return player[this.layer].points.gte(2) },
+        unlocked() { return player.g.unlocked },
+    },
+    2: {
+        requirementDescription: "Get 3 Generators. (2)",
+        effectDescription: "^1.01 PP.",
+        done() { return player[this.layer].points.gte(3) },
+        unlocked() { return hasMilestone('g', 1) },
+    },
+    3: {
+        requirementDescription: "Get 5 Generators. (3)",
+        effectDescription: "Increase Gen eff base by another 0.1.",
+        done() { return player[this.layer].points.gte(5) },
+        unlocked() { return hasMilestone('g', 2) },
+    },
+},
+effBase() {
+    let base = new Decimal(1.5);
+    if (hasMilestone('g', 1)) base = base.add(0.1);
+    if (hasMilestone('g', 3)) base = base.add(0.1);
+    if (hasUpgrade('g', 11)) base = base.add(0.05);
+    return base;
+},
 })
