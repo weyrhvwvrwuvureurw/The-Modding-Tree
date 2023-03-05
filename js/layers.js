@@ -174,6 +174,7 @@ addLayer("s", {
            let eff = player.p.points.plus(2).pow(0.5);
            if (hasUpgrade('p', 12)) eff = eff.pow(2);
            if (hasUpgrade('p', 22)) eff = eff.times(3);
+           if (hasUpgrade('sp', 11)) eff = eff.pow(2);
            return eff;
         },
         effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
@@ -224,6 +225,7 @@ addLayer("b", {
     exponent: 0.25,
        gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
+        if (hasUpgrade('t', 12)) mult = mult.times(upgradeEffect('t', 12));
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -274,7 +276,7 @@ addLayer("b", {
            let base = new Decimal(1.5);
            if (hasMilestone('g', 3)) base = base.add(0.1);
            if (hasUpgrade('b', 11)) base = base.add(0.05);
-           base = base.add(tmp.s.effect)
+           base = base.add(tmp.sp.effect)
            return base;
        },
     })
@@ -295,6 +297,7 @@ addLayer("g", {
     exponent: 0.25,
        gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
+        if (hasUpgrade('sp', 11)) mult = mult.times(2);
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -391,16 +394,15 @@ addLayer("t", {
                 description: "^1.05 PP.",
                 cost: new Decimal(2),
             },
-            11: {
+            12: {
                 title: "x5 Speed",
                 description: "Boost boosters based on TC.",
                 cost: new Decimal(4),
                 effect() {
-                    let eff = player.t.points.plus(1).pow(0.05);
+                    let eff = player.t.points.plus(1).pow(0.3);
                     return eff;
                  },
                  effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
-                 unlocked() { return player.t.unlocked},
             },
         },
 })
@@ -429,7 +431,7 @@ addLayer("sp", {
     row: 3, // Row the layer is in on the tree (0 is the first row)
     layerShown(){return player.g.unlocked},
     effect() {
-        let eff = Decimal.pow(this.effBase, player.t.points).pow(0.5)
+        let eff = Decimal.pow(this.effBase, player.sp.points).pow(0.5)
         return eff;
        },
        effectDescription(){
@@ -438,5 +440,17 @@ addLayer("sp", {
          effBase() {
             let base = new Decimal(1.65);
             return base;
+        },
+        upgrades: {
+            11: {
+                title: "Travel to Mars",
+                description: "x2 Generators.",
+                cost: new Decimal(2),
+            },
+            12: {
+                title: "Jupiter",
+                description: "<b>Prestige boost</b>'s effect is squared.",
+                cost: new Decimal(4),
+            },
         },
 })

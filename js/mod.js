@@ -1,7 +1,7 @@
 let modInfo = {
-	name: "The Small Tree",
-	id: "tstr",
-	author: "me",
+	name: "The Generia Tree",
+	id: "tgtr",
+	author: "w",
 	pointsName: "points",
 	modFiles: ["layers.js", "tree.js"],
 
@@ -13,13 +13,17 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.007",
-	name: "Noice.",
+	num: "0.008",
+	name: "Actual Time & Space.",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
+<h3>v0.008</h3><br>
+		- Added 4 upgrades.<br>
+		- Readded start layer.<br>
 <h3>v0.007</h3><br>
 		- Added Time and Space.<br>
+		- Removed start layer.<br>
 <h3>v0.006</h3><br>
 		- Added 3 milestones and 2 upgrades on each layer.<br>
 <h3>v0.005</h3><br>
@@ -83,7 +87,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.t.points.gte(new Decimal("1"))
+	return player.t.points.gte(new Decimal("5"))
 }
 
 
