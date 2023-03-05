@@ -56,7 +56,16 @@ function canGenPoints(){
 function getPointGen() {
 	if(!canGenPoints())
 		return new Decimal(0)
-	let gain = new Decimal(1)
+	let gain = new Decimal(0.001)
+	if (hasUpgrade('s', 13)) gain = gain.times(2);
+	if (hasUpgrade('s', 14)) gain = gain.times(upgradeEffect('s', 14));
+	if (inChallenge('s', 11)) gain = gain.times(Decimal.pow(0.3, challengeCompletions('s', 11)));
+	if (inChallenge('s', 12)) gain = gain.times(Decimal.pow(0.1, challengeCompletions('s', 12)));
+	if (hasChallenge('s', 12)) gain = gain.times(Decimal.pow(1.1, challengeCompletions('s', 12)));
+	if (hasUpgrade('s', 16)) gain = gain.times(upgradeEffect('s', 16));
+	if (hasUpgrade('s', 21)) gain = gain.times(5);
+	if (hasMilestone('s', 1)) gain = gain.times(3);
+	if (hasUpgrade('s', 22)) gain = gain.times(upgradeEffect('s', 22));
 	if (hasUpgrade('p', 11)) gain = gain.times(upgradeEffect('p', 11));
     gain = gain.times(tmp.b.effect);
 	if (hasMilestone('b', 2)) gain = gain.times(1e7);
