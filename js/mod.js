@@ -1,26 +1,26 @@
 let modInfo = {
-	name: "The ??? Tree",
-	id: "mymod",
-	author: "nobody",
-	pointsName: "points",
+	name: "The SM Tree",
+	id: "tsmtr",
+	author: "Me",
+	pointsName: "subscribers",
 	modFiles: ["layers.js", "tree.js"],
 
 	discordName: "",
 	discordLink: "",
-	initialStartPoints: new Decimal (10), // Used for hard resets and new players
-	offlineLimit: 1,  // In hours
+	initialStartPoints: new Decimal (1), // Used for hard resets and new players
+	offlineLimit: 86400,  // In hours
 }
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.0",
+	num: "0.0.1",
 	name: "Literally nothing",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
-	<h3>v0.0</h3><br>
-		- Added things.<br>
-		- Added stuff.`
+	<h3>v0.0.1</h3><br>
+		- Added 2 upgrades.<br>
+		- Added lots of stuff in the Y layer.`
 
 let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
 
@@ -43,6 +43,9 @@ function getPointGen() {
 		return new Decimal(0)
 
 	let gain = new Decimal(1)
+	gain = gain.times(tmp.y.effect);
+	if (hasMilestone('y', 4)) gain = gain.times(tmp.y.viewEff2);
+	if (hasUpgrade('y', 12)) gain = gain.times(Decimal.pow(player.y.money.div(100), 1.2));
 	return gain
 }
 
@@ -56,7 +59,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.points.gte(new Decimal("e280000000"))
+	return player.y.points.gte(new Decimal("5000"))
 }
 
 
