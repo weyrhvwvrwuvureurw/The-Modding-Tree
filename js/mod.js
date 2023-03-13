@@ -1,6 +1,6 @@
 let modInfo = {
-	name: "The SM Tree",
-	id: "tsmtr",
+	name: "The Youtube Tree",
+	id: "tyt",
 	author: "Me",
 	pointsName: "subscribers",
 	modFiles: ["layers.js", "tree.js"],
@@ -13,12 +13,16 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.0.1",
-	name: "Literally nothing",
+	num: "0.0.2",
+	name: "Mostly nothing",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
-	<h3>v0.0.1</h3><br>
+<h3>v0.0.1</h3><br>
+		- Added 5 upgrades.<br>
+		- Added tons of stuff in the Y layer.<br>
+		- Welp, that's it! Small coding project for me!<br>
+ 	<h3>v0.0.1</h3><br>
 		- Added 2 upgrades.<br>
 		- Added lots of stuff in the Y layer.`
 
@@ -46,6 +50,8 @@ function getPointGen() {
 	gain = gain.times(tmp.y.effect);
 	if (hasMilestone('y', 4)) gain = gain.times(tmp.y.viewEff2);
 	if (hasUpgrade('y', 12)) gain = gain.times(Decimal.pow(player.y.money.div(100), 1.2));
+	if (inChallenge('y', 11)) gain = gain.times(Decimal.pow(0.082, challengeCompletions('y', 11)));
+	gain = gain.times(tmp.y.moneyEff2);
 	return gain
 }
 
@@ -59,7 +65,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.y.points.gte(new Decimal("5000"))
+	return player.y.points.gte(new Decimal("4e6"))
 }
 
 
@@ -68,12 +74,11 @@ function isEndgame() {
 
 // Style for the background, can be a function
 var backgroundStyle = {
-
 }
 
 // You can change this if you have things that can be messed up by long tick lengths
 function maxTickLength() {
-	return(3600) // Default is 1 hour which is just arbitrarily large
+	return(1e190) // Default is 1 hour which is just arbitrarily large
 }
 
 // Use this if you need to undo inflation from an older version. If the version is older than the version that fixed the issue,
