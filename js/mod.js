@@ -1,14 +1,14 @@
 let modInfo = {
-	name: "The ??? Tree",
-	id: "mymod",
-	author: "nobody",
-	pointsName: "points",
+	name: "Singularity",
+	id: "tst",
+	author: "me",
+    pointsName: "g",
 	modFiles: ["layers.js", "tree.js"],
 
 	discordName: "",
 	discordLink: "",
 	initialStartPoints: new Decimal (10), // Used for hard resets and new players
-	offlineLimit: 1,  // In hours
+	offlineLimit: 523768763517,  // In hours
 }
 
 // Set your version in num and name
@@ -43,6 +43,8 @@ function getPointGen() {
 		return new Decimal(0)
 
 	let gain = new Decimal(1)
+	gain = gain.times(tmp.s.effect);
+	gain = gain.times(buyableEffect('s', 11));
 	return gain
 }
 
