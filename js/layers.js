@@ -20,6 +20,8 @@ addLayer("y", {
         mult = mult.times(tmp.y.viewEff2);
         if (hasUpgrade('y', 13)) mult = mult.times(upgradeEffect('y', 13));
         if (hasChallenge('y', 11)) mult = mult.times(tmp.y.challenges[11].rewardEffect);
+        if (inChallenge('y', 13)) mult = mult.times(0.1);
+        if (hasChallenge('y', 13)) mult = mult.times(tmp.y.challenges[13].rewardEffect);
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -191,6 +193,18 @@ addLayer("y", {
                 },
                 canComplete: function() {return player.y.points.gte(300)},
                 completionLimit: "15",
+            },
+            13: {
+                name: "New Channel",
+                challengeDescription() {return "Subs and views are nerfed by x10." + challengeCompletions(this.layer, this.id) + "/" + this.completionLimit + " completions."},
+                goalDescription: "Get 100K subs.",
+                rewardDescription: "Subs are boosted based on completions.",
+                rewardEffect() {
+                    let ret = Decimal.pow(1.089, challengeCompletions(this.layer, this.id));
+                    return ret;
+                },
+                canComplete: function() {return player.points.gte(100000)},
+                completionLimit: "3",
             },
         },
     })

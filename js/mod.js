@@ -13,15 +13,16 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.0.2",
+	num: "0.0.2.1",
 	name: "Mostly nothing",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
-<h3>v0.0.1</h3><br>
+<h3>v0.0.2.1</h3><br>
+		- Added a challenge.<br>
+<h3>v0.0.2</h3><br>
 		- Added 5 upgrades.<br>
 		- Added tons of stuff in the Y layer.<br>
-		- Welp, that's it! Small coding project for me!<br>
  	<h3>v0.0.1</h3><br>
 		- Added 2 upgrades.<br>
 		- Added lots of stuff in the Y layer.`
@@ -51,6 +52,7 @@ function getPointGen() {
 	if (hasMilestone('y', 4)) gain = gain.times(tmp.y.viewEff2);
 	if (hasUpgrade('y', 12)) gain = gain.times(Decimal.pow(player.y.money.div(100), 1.2));
 	if (inChallenge('y', 11)) gain = gain.times(Decimal.pow(0.082, challengeCompletions('y', 11)));
+	if (inChallenge('y', 13)) gain = gain.times(0.1);
 	gain = gain.times(tmp.y.moneyEff2);
 	return gain
 }
