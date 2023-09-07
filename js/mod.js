@@ -1,8 +1,8 @@
 let modInfo = {
-	name: "The Unbalanced Tree",
-	id: "tutr",
+	name: "Create STARS",
+	id: "cs",
 	author: "me",
-	pointsName: "points",
+	pointsName: "stardust",
 	modFiles: ["layers.js", "tree.js"],
 
 	discordName: "",
@@ -87,93 +87,9 @@ function canGenPoints(){
 function getPointGen() {
 	if(!canGenPoints())
 		return new Decimal(0)
-	let gain = new Decimal(1)
-	if (hasUpgrade('p', 11)) gain = gain.times(2);
-	if (hasUpgrade('p', 12)) gain = gain.times(upgradeEffect('p', 12));
-	if (hasUpgrade('p', 13)) gain = gain.times(upgradeEffect('p', 13));
-	if (hasUpgrade('p', 14)) gain = gain.pow(1.25);
-	if (hasUpgrade('p', 21)) gain = gain.pow(1.05);
-	if (hasUpgrade('i', 11)) gain = gain.times(upgradeEffect('i', 11));
-	if (hasUpgrade('i', 12)) gain = gain.pow(upgradeEffect('i', 12));
-	if (hasUpgrade('i', 13)) gain = gain.times(upgradeEffect('i', 13));
-	if (hasUpgrade('i', 14)) gain = gain.times(upgradeEffect('i', 14));
-	if (hasUpgrade('i', 15)) gain = gain.times(upgradeEffect('i', 15));
-	if (hasUpgrade('i', 16)) gain = gain.times(upgradeEffect('i', 16));
-	if (hasUpgrade('i', 21)) gain = gain.times(upgradeEffect('i', 21));
-	if (hasUpgrade('i', 22)) gain = gain.times(upgradeEffect('i', 22));
-	if (hasUpgrade('i', 23)) gain = gain.times(upgradeEffect('i', 23));
-	if (hasUpgrade('i', 24)) gain = gain.times(upgradeEffect('i', 24));
-	if (hasUpgrade('inf', 11)) gain = gain.times(upgradeEffect('inf', 11));
-	if (hasUpgrade('inf', 12)) gain = gain.pow(upgradeEffect('inf', 12));
-	if (hasUpgrade('inf', 13)) gain = gain.pow(upgradeEffect('inf', 13));
-	if (hasUpgrade('inf', 14)) gain = gain.pow(upgradeEffect('inf', 14));
-	if (hasUpgrade('inf', 15)) gain = gain.times(upgradeEffect('inf', 15));
-	if (hasUpgrade('inf', 21)) gain = gain.times(upgradeEffect('inf', 21));
-	if (hasUpgrade('inf', 22)) gain = gain.times(upgradeEffect('inf', 22));
-	if (hasUpgrade('inf', 23)) gain = gain.times(upgradeEffect('inf', 23));
-	if (hasUpgrade('inf', 24)) gain = gain.times(upgradeEffect('inf', 24));
-	if (inChallenge('inf', 11)) gain = gain.pow(0.5);
-	if (hasChallenge('inf', 11)) gain = gain.pow(1.11);
-	if (hasMilestone('inf', 0)) gain = gain.times(1e9);
-	if (hasMilestone('inf', 1)) gain = gain.times(1e15);
-	if (hasMilestone('inf', 2)) gain = gain.times(1e35);
-	if (hasMilestone('inf', 3)) gain = gain.pow(1.1);
-	if (hasMilestone('inf', 4)) gain = gain.pow(2);
-	if (inChallenge('inf', 12)) gain = gain.div(1e25);
-	if (hasChallenge('inf', 12)) gain = gain.times(1e100);
-	if (inChallenge('inf', 21)) gain = log2(gain);
-	if (hasChallenge('inf', 21)) gain = gain.pow(1.095);
-	if (inChallenge('inf', 22)) gain = gain.pow(0.4);
-	if (hasChallenge('inf', 22)) gain = gain.pow(1.0975);
-	if (inChallenge('inf', 31)) gain = gain.div(1e35);
-	if (hasChallenge('inf', 31)) gain = gain.times(1e125);
-	if (inChallenge('inf', 32)) gain = log2(gain.pow(0.8));
-	if (hasChallenge('inf', 32)) gain = gain.pow(1.09);
-	if (hasUpgrade('e', 11)) gain = gain.times(upgradeEffect('e', 11));
-	if (hasUpgrade('e', 12)) gain = gain.times(upgradeEffect('e', 12));
-	if (hasUpgrade('e', 13)) gain = gain.times(upgradeEffect('e', 13));
-	if (hasUpgrade('e', 14)) gain = gain.pow(upgradeEffect('e', 14));
-	if (hasUpgrade('e', 15)) gain = gain.times(696969);
-	if (hasUpgrade('e', 16)) gain = gain.times(6.9e69);
-	if (hasUpgrade('e', 21)) gain = gain.pow(upgradeEffect('e', 21));
-	if (hasUpgrade('e', 22)) gain = gain.pow(upgradeEffect('e', 22));
-	if (hasUpgrade('e', 23)) gain = gain.times(upgradeEffect('e', 23));
-	if (hasUpgrade('e', 24)) gain = gain.times(upgradeEffect('e', 24));
-	if (inChallenge('e', 11)) gain = gain.pow(0.3);
-	if (hasChallenge('e', 11)) gain = gain.pow(1.2);
-	if (inChallenge('e', 12)) gain = gain.div(1e125);
-	if (hasChallenge('e', 12)) gain = gain.times(1e200);
-	if (inChallenge('e', 21)) gain = ln(gain);
-	if (hasChallenge('e', 21)) gain = gain.pow(1.1);
-	if (inChallenge('e', 22)) gain = gain.div(upgradeEffect('i', 15));
-	if (hasChallenge('e', 22)) gain = gain.pow(1.16);
-	if (inChallenge('e', 31)) gain = gain.log2(gain.pow(0.5));
-	if (hasChallenge('e', 31)) gain = gain.times(1e500);
-	if (inChallenge('e', 32)) gain = gain.div(upgradeEffect('i', 14));
-	if (hasChallenge('e', 32)) gain = gain.pow(1.111);
-	if (inChallenge('e', 41)) gain = gain.pow(0.2);
-	if (hasChallenge('e', 41)) gain = gain.pow(1.25);
-	if (inChallenge('e', 42)) gain = gain.div(1e300);
-	if (hasChallenge('e', 42)) gain = gain.pow(1.09);
-	if (inChallenge('e', 51)) gain = ln(gain.pow(0.6));
-	if (hasChallenge('e', 51)) gain = gain.pow(1.1);
-	if (inChallenge('e', 52)) gain = gain.div(upgradeEffect('i', 15).times((upgradeEffect('i', 14))));
-	if (hasChallenge('e', 52)) gain = gain.pow(1.2);
-	if (inChallenge('e', 61)) gain = gain.log2(gain.pow(0.35).div(1e50));
-	if (hasChallenge('e', 61)) gain = gain.times(1e1111);
-	if (inChallenge('e', 62)) gain = gain.div(upgradeEffect('i', 15).times((upgradeEffect('i', 14)).times((upgradeEffect('i', 16))).times((upgradeEffect('i', 17)))));
-	if (hasChallenge('e', 62)) gain = gain.pow(1.111);
-	if (hasMilestone('e', 0)) gain = gain.times(1e9);
-	if (hasMilestone('e', 1)) gain = gain.times(1e15);
-	if (hasMilestone('e', 2)) gain = gain.times(1e35);
-	if (hasMilestone('e', 3)) gain = gain.pow(1.1);
-	if (hasMilestone('e', 4)) gain = gain.pow(2);
-	if (inChallenge('r', 11)) gain = gain.pow(gain.pow(0.75));
-	if (hasUpgrade('r', 12)) gain = gain.times(upgradeEffect('r', 12));
-	if (inChallenge('r', 12)) gain = gain.pow(gain.pow(0.57));
-	if (inChallenge('r', 12)) gain = gain.pow(gain.pow(0.42));
-	gain = gain.times(tmp.e.effect)
-	gain = gain.times(tmp.r.effect)
+
+		let gain = new Decimal(1)
+		if(hasUpgrade('s', 11)) gain = gain.times(2);
 	return gain
 }
 	
@@ -188,7 +104,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.r.points.gte(new Decimal("5000"))
+	return player.s.points.gte(new Decimal("12000"))
 }
 
 
